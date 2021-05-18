@@ -4,12 +4,12 @@
      <!--seach--> 
     <div class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl ">
             <span class="flex items-center justify-end w-auto p-1 text-gray-500">
-                <img src="@/assets/images/search.svg" alt="location">
+                <img src="@/assets/images/search.svg" alt="seach">
             </span>
             <input class="w-full p-1 rounded" type="text" placeholder="Поиск по сайту">
         </div>
     <div class="grid grid-cols-2 gap-2 px-2 pb-4 xs:grid-cols-2 s:grid-cols-3 m:grid-cols-3 l:grid-cols-4">
-      <div class="flex sm:flex-wrap" v-for="category in categories" :key="categories.name">
+      <div class="flex sm:flex-wrap" v-for="categories in categories" :key="categories.name">
         <!--Card-->  
         <div class="bg-white border border-white shadow-lg rounded-2xl">
           <div class="p-4 px-1 py-1 sm:w-1/2 lg:w-1/3 sm:py-1">
