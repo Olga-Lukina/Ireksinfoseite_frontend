@@ -28,31 +28,26 @@ const routes = [
     props: true,
     component: () =>
         import( /* webpackChunkName: "categories"*/ "../views/CategoriesListing"),
-    children: [
-      {
-        path: ":subcategoriesSlug",
-        name: "SubCategoriesListing",
-        props: true,
-        component: () =>
-            import(/* webpackChunkName: "subcategories"*/ "../views/SubCategoriesListing"),
-              }, {
-                path: ":productlistingSlug",
-                name: "ProductListing",
-                component: () =>
-                    import(/* webpackChunkName: "productlisting"*/ "../views/ProductListing"),
-                        children: [
-                          {
-                            path: ":productdetailSlug",
-                            name: "ProductDetail",
-                            props: true,
-                            component: () =>
-                                import(/* webpackChunkName: "productdetail"*/ "../views/ProductDetail"),
+        
+  },
+  {
+    path: "/categories/:slug/:subcategoriesSlug",
+    name: "ProductListing",
+    props: true,
+    component: () =>
+        import( /* webpackChunkName: "subcategories"*/ "../views/ProductListing"),
+         
+  },
+  {
+    path: "/categories/:slug/:subcategoriesSlug/:productSlug",
+    name: "ProductDetail",
+    props: true,
+    component: () =>
+        import( /* webpackChunkName: "subcategories"*/ "../views/ProductDetail"),
+         
+  }
 
-                          }
-        ]
-      }
-    ]
-  }]
+]
 
 
   const router = createRouter({

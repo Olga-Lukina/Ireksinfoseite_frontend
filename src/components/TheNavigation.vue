@@ -6,7 +6,7 @@
     <li><router-link to="/login"><img src="@/assets/images/login.svg" alt="login"></router-link> </li>
     </ul>
   </div>
-  <router-view/>
+  <router-view :key ='$route.params' />
 </template>
 
 <script>

@@ -1,23 +1,25 @@
 <template>
    <div class="home">
-    <CategoriesListing />
+    <CategoryGrid :categories='categories'/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import store from "@/store.js";
-import CategoriesListing from '@/views/CategoriesListing.vue'
+import CategoryGrid from '@/components/CategoryGrid.vue'
 
 export default {
   name: "home",
   components: {
-    CategoriesListing
+    CategoryGrid
   },
-  data() {
-    return {
-      categories: store.categories
-    };
+  computed: {
+    categories() {
+      return store.categories.filter(
+        category => category.parentslug ===''
+      );
+    }
   }
 };
 </script>
