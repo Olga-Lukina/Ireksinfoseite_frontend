@@ -3,14 +3,14 @@
     <div class="container">
       <!--link back-->
       <div class="bg-gray-200 border-2 border-gray-200 rounded-t-3xl">
-        <div class="flex items-center justify-center p-2 m-2" @click="goBack">
+        <a class="flex items-center justify-center p-2 m-2" @click="goBack">
           <img
             class="mr-auto"
             src="@/assets/images/chevron_left.svg"
             alt="chevron_left"
           />
-          <a class="mr-auto">{{ name }}</a>
-        </div>
+          <span class="mr-auto">{{ parentCategory.name }}</span>
+        </a>
       </div>
       <ProductGrid :products="products" />
     </div>
@@ -27,15 +27,21 @@ export default {
   components: {
     ProductGrid,
   },
-  props: {
-    slug: {
-      type: String,
-      required: true,
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
   },
   computed: {
-    categories() {
-      return store.categories.filter(
+    products() {
+      const products = store.products.filter(
+        (product) => product.parentslug === this.$route.params.slug
+      );
+      console.log(this.$route.params.slug);
+      return products;
+    },
+    parentCategory() {
+      return store.categories.find(
         (category) => category.parentslug === this.$route.params.slug
       );
     },
