@@ -4,11 +4,11 @@
     <div class="relative">
       <img
         class="mx-auto border rounded-t-3xl"
-        src="@/assets/images/eclir_1.png"
+        src="@/assets/images/eclir_1.jpg"
         alt="eclir_1"
       />
       <div
-        class="absolute top-0 left-0 flex items-center justify-center w-screen p-4 mx-auto bg-white bg-opacity-50 border rounded-t-3xl"
+        class="absolute top-0 left-0 flex items-center justify-center w-full p-4 mx-auto bg-white bg-opacity-50 border rounded-t-3xl"
       >
         <img
           class="mr-auto"
@@ -142,3 +142,8 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  components: {},
+};
+</script>
