@@ -35,15 +35,18 @@ export default {
   computed: {
     products() {
       const products = store.products.filter(
-        (product) => product.parentslug === this.$route.params.slug
+        (product) =>
+          product.categoryslug === this.$route.params.subcategoriesSlug
       );
-      console.log(this.$route.params.slug);
+      console.log(products);
       return products;
     },
     parentCategory() {
-      return store.categories.find(
-        (category) => category.parentslug === this.$route.params.slug
+      const category = store.categories.find(
+        (category) => category.slug === this.$route.params.subcategoriesSlug
       );
+      console.log(category);
+      return category;
     },
   },
 };

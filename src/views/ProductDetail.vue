@@ -1,6 +1,6 @@
 <template>
   <!--Slider-->
-  <TheSwiperSlider />
+  <TheSwiperSlider :images="product.images" />
   <div class="container mx-auto">
     <div class="relative">
       <img
@@ -16,11 +16,11 @@
           src="@/assets/images/chevron_left.svg"
           alt="chevron_left"
         />
-        <h3 class="mr-auto">Прома эклер</h3>
+        <h3 class="mr-auto">{{ product.name }}</h3>
       </div>
     </div>
     <!--title and desctiption for productname-->
-    <h1 class="m-4 text-xl font-extrabold uppercase ">Прома эклер</h1>
+    <h1 class="m-4 text-xl font-extrabold uppercase ">{{ product.name }}</h1>
     <p class="m-4">Сухая смесь для приготовления заварного полуфабриката.</p>
     <!--Recepies-->
     <h2 class="m-4 font-extrabold uppercase text-red-850">
@@ -153,21 +153,13 @@ export default {
     RecipeGrid,
     TheSwiperSlider,
   },
-  props: {
-    slug: {
-      type: String,
-      required: true,
-    },
-    productdetailSlug: {
-      type: String,
-      required: true,
-    },
-  },
   computed: {
-    productlisting() {
-      return store.productlisting.find(
-        (productdetail) => productdetail.slug === this.slug
+    product() {
+      const product = store.products.find(
+        (product) => product.slug === this.$route.params.productSlug
       );
+      console.log(product);
+      return product;
     },
   },
 };

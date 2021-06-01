@@ -1,13 +1,12 @@
 <template>
-  <swiper :thumbs="{ swiper: thumbsSwiper }" ...> ... </swiper>
   <swiper
     :slides-per-view="3"
     :space-between="50"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
   >
-    <swiper-slide v-for="image in images" :key="image">
-      <img :src="require(`@/assets/images/${product.image}`)"
+    <swiper-slide class="w-full" v-for="image in images" :key="image.src">
+      <img src="https://picsum.photos/seed/slide1/600/300"
     /></swiper-slide>
   </swiper>
 </template>
@@ -33,17 +32,15 @@ export default {
     Swiper,
     SwiperSlide,
   },
-
+  props: {
+    images: {
+      type: Array,
+      required: true,
+    },
+  },
   methods: {
     setThumbsSwiper(swiper) {
       this.thumbsSwiper = swiper;
-    },
-  },
-  computed: {
-    productlisting() {
-      return store.productlisting.find(
-        (productdetail) => productdetail.slug === this.slug
-      );
     },
   },
 };

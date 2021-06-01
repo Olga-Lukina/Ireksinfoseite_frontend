@@ -133,7 +133,7 @@ export default {
         'teclir_6.jpg',
       ],
       description: 'Сухая смесь для приготовления заварного полуфабриката',
-      categoryslug: 'smesy-dla-konditerskix-izdeliy',
+      categoryslug: 'smesi-dla-zavarnyx-polyfabrikatov',
     },
   ],
   recipes: [

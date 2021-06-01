@@ -9,6 +9,12 @@ const routes = [
     props: true,
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "login"*/ '../views/Register'),
+    props: true,
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "login"*/ '../views/Login'),
@@ -48,6 +54,13 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "subcategories"*/ '../views/RecipeDetail'),
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () =>
+      import(/* webpackChunkName: "login"*/ '../views/Dashboard'),
+    props: true,
   },
 ];
 
