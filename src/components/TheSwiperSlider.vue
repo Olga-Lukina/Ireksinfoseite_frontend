@@ -1,15 +1,26 @@
 <template>
+  <swiper :thumbs="{ swiper: thumbsSwiper }">
+    <swiper-slide v-for="image of images" :key="image"
+      ><img class="mb-4 border rounded-t-3xl" :src="`/images_slider/${image}`"
+    /></swiper-slide>
+  </swiper>
+
   <swiper
-    :slides-per-view="3"
-    :space-between="50"
-    @swiper="onSwiper"
-    @slideChange="onSlideChange"
+    @swiper="setThumbsSwiper"
+    watch-slides-visibility
+    watch-slides-progress
   >
-    <swiper-slide class="w-full" v-for="image in images" :key="image.src">
-      <img src="https://picsum.photos/seed/slide1/600/300"
+    <swiper-slide
+      v-for="image of images"
+      :loop="true"
+      :spaceBetween="10"
+      :virtualIndex="image"
+      :key="image"
+      ><img class="w-1/5 mx-4 rounded-xl" :src="`/images_slider/${image}`"
     /></swiper-slide>
   </swiper>
 </template>
+
 <script>
 import store from '@/store';
 // import Swiper core and required modules
@@ -17,7 +28,7 @@ import SwiperCore, { Thumbs } from 'swiper';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
+import 'swiper/swiper-bundle.css';
 // install Swiper modules
 SwiperCore.use([Thumbs]);
 
@@ -43,5 +54,6 @@ export default {
       this.thumbsSwiper = swiper;
     },
   },
+  params: {},
 };
 </script>

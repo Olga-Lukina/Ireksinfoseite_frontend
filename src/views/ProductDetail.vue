@@ -1,23 +1,19 @@
 <template>
   <!--Slider-->
-  <TheSwiperSlider :images="product.images" />
   <div class="container mx-auto">
     <div class="relative">
-      <img
-        class="mx-auto border rounded-t-3xl"
-        src="@/assets/images/eclir_1.jpg"
-        alt="eclir_1"
-      />
-      <div
-        class="absolute top-0 left-0 flex items-center justify-center w-full p-4 mx-auto bg-white bg-opacity-50 border rounded-t-3xl"
+      <TheSwiperSlider :images="product.images" />
+      <a
+        class="absolute top-0 left-0 z-10 flex items-center justify-center w-full p-4 mx-auto bg-white bg-opacity-50 border rounded-t-3xl"
+        @click="goBack"
       >
         <img
           class="mr-auto"
           src="@/assets/images/chevron_left.svg"
           alt="chevron_left"
         />
-        <h3 class="mr-auto">{{ product.name }}</h3>
-      </div>
+        <span class="mr-auto">{{ product.name }}</span>
+      </a>
     </div>
     <!--title and desctiption for productname-->
     <h1 class="m-4 text-xl font-extrabold uppercase ">{{ product.name }}</h1>
@@ -160,6 +156,11 @@ export default {
       );
       console.log(product);
       return product;
+    },
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };

@@ -4,7 +4,7 @@
     <div class="relative">
       <img
         class="mx-auto border rounded-t-3xl"
-        src="@/assets/images/eclir_1.jpg"
+        src="/images_slider/eclir_1.jpg"
         alt="eclir_1"
       />
       <div

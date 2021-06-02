@@ -15,7 +15,7 @@
             <router-link :to="productlink(product)">
               <img
                 class="border rounded-2xl"
-                :src="require(`@/assets/images/${product.images[0]}`)"
+                :src="require(`/public/images_slider/${product.images[0]}`)"
                 :alt="product.name"
               />
             </router-link>
