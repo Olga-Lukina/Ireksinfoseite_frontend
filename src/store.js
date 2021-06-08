@@ -142,7 +142,7 @@ export default {
       slug: 'izdelia-a-la-churos',
       id: 1,
       image: 'torte.jpg',
-      categoryslug: 'smesy-dla-konditerskix-izdeliy',
+      categoryslug: 'smesi-dla-zavarnyx-polyfabrikatov',
     },
   ],
 };
