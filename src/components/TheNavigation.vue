@@ -21,9 +21,9 @@
           ><img src="@/assets/images/register.svg" alt="register"
         /></router-link>
       </li>
-      <li>
+      <li v-if="$store.state.user">
         <router-link to="/dashboard">
-          Dashboard
+          {{ $store.state.user.name }}
         </router-link>
       </li>
     </ul>
