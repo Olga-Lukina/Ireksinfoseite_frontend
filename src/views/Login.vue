@@ -70,12 +70,12 @@ export default {
   methods: {
     login() {
       this.$store
-        .dispatch('login', {
+        .commit('login', {
           email: this.email,
           password: this.password,
         })
         .then(() => {
-          this.$router.push({ name: 'dashboard' });
+          this.$router.push({ name: 'home' });
         })
         .catch((err) => {
           this.error = err.response.data.error;

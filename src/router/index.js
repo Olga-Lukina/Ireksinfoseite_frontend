@@ -28,6 +28,20 @@ const routes = [
     props: true,
   },
   {
+    path: '/question',
+    name: 'Question',
+    component: () =>
+      import(/* webpackChunkName: "location"*/ '../views/Question'),
+    props: true,
+  },
+  {
+    path: '/review',
+    name: 'Review',
+    component: () =>
+      import(/* webpackChunkName: "location"*/ '../views/Review'),
+    props: true,
+  },
+  {
     path: '/categories/:slug',
     name: 'CategoriesListing',
     props: true,
@@ -59,14 +73,24 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: () =>
-      import(/* webpackChunkName: "login"*/ '../views/Dashboard'),
+      import(/* webpackChunkName: "dashboard"*/ '../views/Dashboard'),
     props: true,
+    //meta: { requiresAuth: true },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user');
+
+  if (to.matched.some((record) => record.meta.requiresAuth) && !loggedIn) {
+    next('/');
+  }
+  next();
 });
 
 export default router;

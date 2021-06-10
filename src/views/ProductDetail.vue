@@ -18,6 +18,29 @@
     <!--title and desctiption for productname-->
     <h1 class="m-4 text-xl font-extrabold uppercase ">{{ product.name }}</h1>
     <p class="m-4">Сухая смесь для приготовления заварного полуфабриката.</p>
+    <!-- stars rating -->
+    <div class="flex items-center justify-between m-4">
+      <div class="flex items-center justify-start ">
+        <div
+          v-for="index in 5"
+          :key="index"
+          class="flex items-center mt-2 mb-4"
+        >
+          <button>
+            <svg
+              class="w-8 h-8 mx-1 text-yellow-500 fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <p>5/5</p>
+    </div>
     <!--Recepies-->
     <h2 class="m-4 font-extrabold uppercase text-red-850">
       Рецеатуры использования:
@@ -48,94 +71,13 @@
         Проекты маркетинговой поддержки:
       </h2>
     </div>
+    <TheReviews @review-submitted="addReview" />
+    <TheQuestions />
     <!--can be intresting-->
     <div>
       <h2 class="m-4 font-extrabold uppercase text-red-850">
         Вас так же может заинтересовать:
       </h2>
-    </div>
-    <!--reviews -->
-    <div
-      class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
-    >
-      <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Отзывы:
-      </h2>
-      <p>всего 19</p>
-      <img
-        class="m-4 transform rotate-180"
-        src="@/assets/images/chevron_left.svg"
-        alt="chevron_left"
-      />
-    </div>
-    <!-- stars rating -->
-    <div class="flex items-center justify-between m-4">
-      <div class="flex items-center justify-start ">
-        <div
-          v-for="index in 5"
-          :key="index"
-          class="flex items-center mt-2 mb-4"
-        >
-          <button>
-            <svg
-              class="w-8 h-8 mx-1 text-yellow-500 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <p>5/5</p>
-    </div>
-    <!-- live review -->
-    <div class="m-4">
-      <h2 class="my-4 font-extrabold text-center uppercase text-red-850">
-        Оставить свой отзыв о продукте:
-      </h2>
-      <div class="relative h-full">
-        <textarea
-          class="w-full mx-auto border rounded-t resize-y h-36"
-        ></textarea>
-        <button
-          class="absolute bottom-0 right-0 w-full p-2 text-white rounded-b bg-red-850 border-1 hover:bg-red-700"
-        >
-          Отправить
-        </button>
-      </div>
-    </div>
-    <!-- questions -->
-    <div
-      class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
-    >
-      <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Вопросы:
-      </h2>
-      <p>всего 10</p>
-      <img
-        class="m-4 transform rotate-180"
-        src="@/assets/images/chevron_left.svg"
-        alt="chevron_left"
-      />
-    </div>
-    <!-- ask question -->
-    <div class="m-4">
-      <h2 class="my-4 font-extrabold text-center uppercase text-red-850">
-        Задать свой вопрос о продукте:
-      </h2>
-      <div class="relative h-full">
-        <textarea
-          class="w-full mx-auto border rounded-t resize-y h-36"
-        ></textarea>
-        <button
-          class="absolute bottom-0 right-0 w-full p-2 text-white rounded-b bg-red-850 border-1 hover:bg-red-700"
-        >
-          Отправить
-        </button>
-      </div>
     </div>
   </div>
 </template>
@@ -143,11 +85,20 @@
 <script>
 import store from '@/store';
 import TheSwiperSlider from '@/components/TheSwiperSlider.vue';
+import TheReviews from '@/components/TheReviews.vue';
+import TheQuestions from '@/components/TheQuestions.vue';
 import RecipeGrid from '@/components/RecipeGrid.vue';
 export default {
+  data() {
+    return {
+      reviews: [],
+    };
+  },
   components: {
     RecipeGrid,
     TheSwiperSlider,
+    TheReviews,
+    TheQuestions,
   },
   computed: {
     product() {
@@ -161,6 +112,9 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    addReview(review) {
+      this.reviews.push(review);
     },
   },
 };

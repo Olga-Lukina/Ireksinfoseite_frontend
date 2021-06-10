@@ -10,20 +10,16 @@ const store = createStore({
     user: null,
   },
   mutations: {
-    increment(state) {
-      state.count++;
+    // set user data
+    async register(state, userData) {
+      const data = axios.post('http://localhost/api/register', userData);
+      localStorage.setItem('token', data.data.token);
     },
-    async register(state, accountData) {
-      try {
-        const data = await axios.post(
-          'http://localhost/api/register',
-          accountData
-        );
-        localStorage.setItem('token', data.data.token);
-      } catch (err) {
-        alert(err.message);
-      }
+    async login(state, userData) {
+      const data = axios.post('http://localhost/api/login', userData);
+      localStorage.setItem('token', data.data.token);
     },
+    // automatic login
     async me(state) {
       if (localStorage.getItem('token')) {
         try {
@@ -37,6 +33,22 @@ const store = createStore({
           alert(err.message);
         }
       }
+    },
+    // logout
+    CLEAR_USER_DATA() {
+      localStorage.removeItem('user');
+      location.reload();
+    },
+  },
+  // if logged in..
+  getters: {
+    loggedIn(state) {
+      return !!state.user;
+    },
+  },
+  actions: {
+    logout({ commit }) {
+      commit('CLEAR_USER_DATA');
     },
   },
 });

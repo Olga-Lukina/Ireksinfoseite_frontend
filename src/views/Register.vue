@@ -128,36 +128,37 @@ export default {
   data() {
     return {
       // form state
-      name: 'olga',
-      surname: 'lukina',
-      telephone: '123456789',
-      email: 'zpa@mail.com',
-      companyname: 'test',
-      jobposition: 'test',
-      password: '123456',
-      password_confirmation: '123456',
+      name: '',
+      surname: '',
+      telephone: '',
+      email: '',
+      companyname: '',
+      jobposition: '',
+      password: '',
+      password_confirmation: '',
       // state
       errors: null,
     };
   },
   methods: {
     register() {
-      this.$store.commit('register', {
-        name: this.name,
-        surname: this.surname,
-        telephone: this.telephone,
-        email: this.email,
-        companyname: this.companyname,
-        jobposition: this.jobposition,
-        password: this.password,
-        password_confirmation: this.password_confirmation,
-      });
-      // .then(() => {
-      //   this.$router.push({ name: 'login' });
-      // })
-      // .catch((err) => {
-      //   this.errors = err.response.data.errors;
-      // });
+      this.$store
+        .commit('register', {
+          name: this.name,
+          surname: this.surname,
+          telephone: this.telephone,
+          email: this.email,
+          companyname: this.companyname,
+          jobposition: this.jobposition,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        })
+        .then(() => {
+          this.$router.push({ name: 'home' });
+        })
+        .catch((err) => {
+          this.errors = err.response.data.errors;
+        });
     },
   },
 };

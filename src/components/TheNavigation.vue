@@ -16,23 +16,39 @@
             alt="ireks-logo"
         /></router-link>
       </li>
-      <li>
+      <li v-if="!loggedIn">
         <router-link to="/register"
           ><img src="@/assets/images/register.svg" alt="register"
         /></router-link>
       </li>
-      <li v-if="$store.state.user">
-        <router-link to="/dashboard">
+      <button v-else type="button" class="logoutButton" @click="logout">
+        <img src="@/assets/images/logout.svg" alt="logout" />
+      </button>
+      <li v-if="loggedIn" class="font-black uppercase text-red-850">
+        <router-link to="/">
           {{ $store.state.user.name }}
         </router-link>
       </li>
     </ul>
+    <span>
+      <router-link to="/dashboard"></router-link>
+    </span>
   </div>
   <router-view :key="$route.params" />
 </template>
 
 <script>
-export default {};
+import { authComputed } from '../helpers.js';
+export default {
+  computed: {
+    ...authComputed,
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+    },
+  },
+};
 </script>
 
 <style scoped></style>
