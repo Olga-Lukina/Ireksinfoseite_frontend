@@ -11,7 +11,7 @@
       <li>
         <router-link to="/"
           ><img
-            class="h-16 mb-2"
+            class="h-12 mb-4"
             src="@/assets/images/logos.svg"
             alt="ireks-logo"
         /></router-link>
@@ -30,9 +30,6 @@
         </router-link>
       </li>
     </ul>
-    <span>
-      <router-link to="/dashboard"></router-link>
-    </span>
   </div>
   <router-view :key="$route.params" />
 </template>

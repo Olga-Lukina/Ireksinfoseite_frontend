@@ -95,7 +95,7 @@ export default {
       name: 'Смеси для заварных полуфабрикатов',
       slug: 'smesi-dla-zavarnyx-polyfabrikatov',
       parentslug: 'smesy-dla-konditerskix-izdeliy',
-      image: 'torte.jpg',
+      image: 'profitrol.jpg',
       numberOfProducts: '1',
       id: 1,
     },

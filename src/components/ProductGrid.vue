@@ -14,14 +14,16 @@
           <figure>
             <router-link :to="productlink(product)">
               <img
-                class="border rounded-2xl"
+                class="object-cover w-full h-40 border s:h-44 l:h-64 rounded-2xl"
                 :src="require(`/public/images_slider/${product.images[0]}`)"
                 :alt="product.name"
               />
             </router-link>
           </figure>
           <router-link :to="productlink(product)">
-            <h2 class="m-2 text-sm font-medium ">{{ product.name }}</h2>
+            <h2 class="m-2 text-sm font-extrabold text-center text-red-850">
+              {{ product.name }}
+            </h2>
           </router-link>
         </div>
       </div>

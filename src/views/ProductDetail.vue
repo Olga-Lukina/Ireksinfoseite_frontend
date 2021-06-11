@@ -1,6 +1,6 @@
 <template>
   <!--Slider-->
-  <div class="container mx-auto">
+  <div class="container mx-auto m:max-w-s">
     <div class="relative">
       <TheSwiperSlider :images="product.images" />
       <a

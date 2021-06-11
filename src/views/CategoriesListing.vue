@@ -1,14 +1,16 @@
 <template>
-  <div class="home">
+  <div class="bg-gray-200 border-2 border-gray-200 rounded-t-3xl">
     <!--link back-->
-    <div class="bg-gray-200 border-2 border-gray-200 rounded-t-3xl">
+    <div class="container mx-auto">
       <a class="flex items-center justify-center p-2 m-2" @click="goBack">
         <img
-          class="mr-auto"
+          class="mr-auto s:mr-4"
           src="@/assets/images/chevron_left.svg"
           alt="chevron_left"
         />
-        <span class="mr-auto text-center">{{ parentCategory.name }}</span>
+        <span class="mr-auto text-center s:mr-4">{{
+          parentCategory.name
+        }}</span>
       </a>
       <CategoryGrid :categories="categories" />
     </div>

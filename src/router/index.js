@@ -33,6 +33,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "location"*/ '../views/Question'),
     props: true,
+    // meta: { requiresAuth: true },
   },
   {
     path: '/review',
@@ -40,6 +41,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "location"*/ '../views/Review'),
     props: true,
+    // meta: { requiresAuth: true },
   },
   {
     path: '/categories/:slug',
@@ -68,14 +70,7 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "subcategories"*/ '../views/RecipeDetail'),
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () =>
-      import(/* webpackChunkName: "dashboard"*/ '../views/Dashboard'),
-    props: true,
-    //meta: { requiresAuth: true },
+    // meta: { requiresAuth: true },
   },
 ];
 
