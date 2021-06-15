@@ -2,12 +2,13 @@
   <swiper :thumbs="{ swiper: thumbsSwiper }">
     <swiper-slide v-for="image of images" :key="image"
       ><img
-        class="object-cover w-full mx-auto mb-4 border s:h-xl rounded-t-3xl"
+        class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
         :src="`/images_slider/${image}`"
     /></swiper-slide>
   </swiper>
 
   <swiper
+    class="s:hidden"
     @swiper="setThumbsSwiper"
     watch-slides-visibility
     watch-slides-progress
@@ -54,11 +55,11 @@ export default {
         },
         // when window width is >= 640px
         768: {
-          slidesPerView: 5,
+          slidesPerView: 1,
           spaceBetween: 40,
         },
         1024: {
-          slidesPerView: 7,
+          slidesPerView: 1,
           spaceBetween: 40,
         },
       },

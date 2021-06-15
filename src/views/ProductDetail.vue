@@ -108,6 +108,13 @@ export default {
       console.log(product);
       return product;
     },
+    recipes() {
+      const recipes = store.recipes.filter(
+        (recipe) => recipe.productslug === this.$route.params.productSlug
+      );
+      console.log(recipes);
+      return recipes;
+    },
   },
   methods: {
     goBack() {

@@ -8,19 +8,28 @@ import axios from 'axios';
 const store = createStore({
   state: {
     user: null,
+    loggedIn: false,
   },
   mutations: {
+    SET_LOGGED_IN(state, isLoggedIn) {
+      state.loggedIn = isLoggedIn;
+    },
     // set user data
-    async register(state, userData) {
-      const data = axios.post('http://localhost/api/register', userData);
-      localStorage.setItem('token', data.data.token);
-    },
-    async login(state, userData) {
-      const data = axios.post('http://localhost/api/login', userData);
-      localStorage.setItem('token', data.data.token);
-    },
     // automatic login
-    async me(state) {
+
+    // logout
+    SET_USER_DATA(state, user) {
+      state.user = user;
+    },
+  },
+  // if user logged in..
+  getters: {
+    loggedIn(state) {
+      return state.loggedIn;
+    },
+  },
+  actions: {
+    async autoLogin({ commit }) {
       if (localStorage.getItem('token')) {
         try {
           const data = await axios.get('http://localhost/api/me', {
@@ -28,27 +37,30 @@ const store = createStore({
               authorization: 'Bearer ' + localStorage.getItem('token'),
             },
           });
-          state.user = data.data;
+          commit('SET_USER_DATA', data.data);
+          commit('SET_LOGGED_IN', true);
         } catch (err) {
           alert(err.message);
         }
       }
     },
-    // logout
-    CLEAR_USER_DATA() {
-      localStorage.removeItem('user');
-      location.reload();
-    },
-  },
-  // if logged in..
-  getters: {
-    loggedIn(state) {
-      return !!state.user;
-    },
-  },
-  actions: {
-    logout({ commit }) {
-      commit('CLEAR_USER_DATA');
+    async logout({ commit }) {
+      try {
+        const data = await axios.post(
+          'http://localhost/api/logout',
+          {},
+          {
+            headers: {
+              authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+          }
+        );
+        localStorage.removeItem('token');
+        commit('SET_USER_DATA', null);
+        commit('SET_LOGGED_IN', false);
+      } catch (err) {
+        alert(err.message);
+      }
     },
   },
 });

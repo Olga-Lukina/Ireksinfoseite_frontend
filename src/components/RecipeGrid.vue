@@ -11,11 +11,12 @@
             <router-link :to="recipelink(recipe)">
               <img
                 class="border rounded-2xl"
-                :src="require(`@/assets/images/${recipe.images}`)"
+                :src="require(`@/assets/images/${recipe.image}`)"
                 :alt="recipe.name"
               />
             </router-link>
           </figure>
+
           <router-link :to="recipelink(recipe)">
             <h2 class="m-2 text-sm font-medium ">{{ recipe.name }}</h2>
           </router-link>

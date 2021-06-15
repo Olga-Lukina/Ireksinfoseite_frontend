@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -68,18 +69,34 @@ export default {
     };
   },
   methods: {
-    login() {
-      this.$store
-        .commit('login', {
+    async login() {
+      try {
+        const data = await axios.post('http://localhost/api/login', {
           email: this.email,
           password: this.password,
-        })
-        .then(() => {
-          this.$router.push({ name: 'home' });
-        })
-        .catch((err) => {
-          this.error = err.response.data.error;
         });
+        localStorage.setItem('token', data.data.token);
+        this.$store.commit('SET_LOGGED_IN', true);
+        this.$store.commit('SET_USER_DATA', data.data.user);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data.message;
+        }
+        console.log(err.message);
+      }
+
+      // this.$store
+      //   .commit('login', {
+      //     email: this.email,
+      //     password: this.password,
+      //   })
+      //   .then(() => {
+      //     this.$router.push({ name: 'home' });
+      //   })
+      //   .catch((err) => {
+      //     this.error = err.response.data.error;
+      //   });
     },
   },
 };

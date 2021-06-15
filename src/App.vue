@@ -14,7 +14,7 @@ export default {
     TheFooter,
   },
   async created() {
-    this.$store.commit('me');
+    this.$store.dispatch('autoLogin');
   },
 };
 </script>

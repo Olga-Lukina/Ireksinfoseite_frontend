@@ -124,6 +124,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -141,24 +142,36 @@ export default {
     };
   },
   methods: {
-    register() {
-      this.$store
-        .commit('register', {
-          name: this.name,
-          surname: this.surname,
-          telephone: this.telephone,
-          email: this.email,
-          companyname: this.companyname,
-          jobposition: this.jobposition,
-          password: this.password,
-          password_confirmation: this.password_confirmation,
-        })
-        .then(() => {
-          this.$router.push({ name: 'home' });
-        })
-        .catch((err) => {
-          this.errors = err.response.data.errors;
-        });
+    async register() {
+      const data = await axios.$post('http://localhost/api/register', {
+        name: this.name,
+        surname: this.surname,
+        telephone: this.telephone,
+        email: this.email,
+        companyname: this.companyname,
+        jobposition: this.jobposition,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
+      });
+      // localStorage.setItem('token', data.data.token);
+
+      // this.$store
+      //   .commit('register', {
+      //     name: this.name,
+      //     surname: this.surname,
+      //     telephone: this.telephone,
+      //     email: this.email,
+      //     companyname: this.companyname,
+      //     jobposition: this.jobposition,
+      //     password: this.password,
+      //     password_confirmation: this.password_confirmation,
+      //   })
+      //   .then(() => {
+      //     this.$router.push({ name: 'home' });
+      //   })
+      //   .catch((err) => {
+      //     this.errors = err.response.data.errors;
+      //   });
     },
   },
 };
