@@ -80,7 +80,7 @@
               <button
                 type="submit"
                 name="button"
-                class="w-full py-3 my-1 text-center text-white rounded bg-red-850 border-1 hover:bg-red-700 bg-green hover:bg-green-dark focus:outline-none"
+                class="w-full py-3 my-1 text-center text-white rounded bg-red-850 border-1 hover:bg-red-700 "
               >
                 Отправить
               </button>
@@ -143,35 +143,27 @@ export default {
   },
   methods: {
     async register() {
-      const data = await axios.$post('http://localhost/api/register', {
-        name: this.name,
-        surname: this.surname,
-        telephone: this.telephone,
-        email: this.email,
-        companyname: this.companyname,
-        jobposition: this.jobposition,
-        password: this.password,
-        password_confirmation: this.password_confirmation,
-      });
-      // localStorage.setItem('token', data.data.token);
-
-      // this.$store
-      //   .commit('register', {
-      //     name: this.name,
-      //     surname: this.surname,
-      //     telephone: this.telephone,
-      //     email: this.email,
-      //     companyname: this.companyname,
-      //     jobposition: this.jobposition,
-      //     password: this.password,
-      //     password_confirmation: this.password_confirmation,
-      //   })
-      //   .then(() => {
-      //     this.$router.push({ name: 'home' });
-      //   })
-      //   .catch((err) => {
-      //     this.errors = err.response.data.errors;
-      //   });
+      try {
+        const data = await axios.post('http://localhost/api/register', {
+          name: this.name,
+          surname: this.surname,
+          telephone: this.telephone,
+          email: this.email,
+          companyname: this.companyname,
+          jobposition: this.jobposition,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+        });
+        localStorage.setItem('token', data.data.token);
+        this.$store.commit('SET_LOGGED_IN', true);
+        this.$store.commit('SET_USER_DATA', data.data.user);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        if (err.response) {
+          this.errors = err.response.data.message;
+        }
+        console.log(err.message);
+      }
     },
   },
 };

@@ -22,13 +22,14 @@ const store = createStore({
       state.user = user;
     },
   },
-  // if user logged in..
+
   getters: {
     loggedIn(state) {
       return state.loggedIn;
     },
   },
   actions: {
+    // holding user data
     async autoLogin({ commit }) {
       if (localStorage.getItem('token')) {
         try {

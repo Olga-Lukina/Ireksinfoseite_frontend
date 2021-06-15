@@ -144,5 +144,19 @@ export default {
       image: 'torte.jpg',
       productslug: 'proma-ekler',
     },
+    {
+      name: 'Кольцо с кракелином',
+      slug: 'kolzo-s-krakelinom',
+      id: 2,
+      image: 'torte.jpg',
+      productslug: 'proma-ekler',
+    },
+    {
+      name: 'Пирожное Эклер Дарк',
+      slug: 'peroznoe-eklir-dark',
+      id: 3,
+      image: 'torte.jpg',
+      productslug: 'proma-ekler',
+    },
   ],
 };
