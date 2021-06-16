@@ -19,17 +19,35 @@
 
 <script>
 // @ is an alias to /src
-import store from '@/store.js';
+// import store from '@/store.js';
 import CategoryGrid from '@/components/CategoryGrid.vue';
+import axios from 'axios';
 
 export default {
   name: 'home',
   components: {
     CategoryGrid,
   },
-  computed: {
-    categories() {
-      return store.categories.filter((category) => category.parentslug === '');
+  data() {
+    return {
+      categories: [],
+      error: null,
+    };
+  },
+  mounted() {
+    this.getCategories();
+  },
+  methods: {
+    async getCategories() {
+      try {
+        const response = await axios.get('http://localhost/api/categories');
+        this.$data.categories = response.data;
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data.message;
+        }
+        console.log(err.message);
+      }
     },
   },
 };

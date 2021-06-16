@@ -54,8 +54,9 @@ export default {
   },
   methods: {
     categorylink(category) {
-      const parentSlug = category.parentslug ? category.parentslug + '/' : '';
-      return `/categories/${parentSlug}${category.slug}`;
+      console.log(category);
+      const parentId = category.parent_id ? category.parent_id + '/' : '';
+      return `/categories/${parentId}${category.slug}`;
     },
   },
 };
