@@ -35,7 +35,9 @@
               >
                 Войти
               </button>
-              <p>{{ error }}</p>
+              <div class="mt-4 text-lg text-center text-red-850">
+                {{ error }}
+              </div>
               <div class="mt-6 text-red-850">
                 <router-link to="/register">Регистрация</router-link>
               </div>

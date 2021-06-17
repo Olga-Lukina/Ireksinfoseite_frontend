@@ -6,7 +6,7 @@
     <div class="flex sm:flex-wrap" v-for="recipe in recipes" :key="recipe.name">
       <!--Card-->
       <div class="bg-white border border-white shadow-md rounded-2xl">
-        <div class="p-1">
+        <div v-if="!loggedIn" class="p-1">
           <figure>
             <router-link :to="recipelink(recipe)">
               <img
@@ -31,6 +31,7 @@
             </button>
           </router-link>
         </div>
+        <div v-else><router-link to="/register"></router-link></div>
       </div>
     </div>
   </div>

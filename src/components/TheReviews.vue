@@ -16,7 +16,7 @@
   </router-link>
 
   <!-- live review -->
-  <form class="m-4 review-form" @submit.prevent="onSubmit">
+  <form action="post" class="m-4 review-form" @submit.prevent="onSubmit">
     <h2 class="my-4 font-extrabold text-center uppercase text-red-850">
       Оставить свой отзыв о продукте:
     </h2>

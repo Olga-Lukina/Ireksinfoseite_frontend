@@ -84,11 +84,11 @@
               >
                 Отправить
               </button>
-              <ul>
-                <li v-for="(error, index) in errors" :key="index">
-                  {{ error }}
-                </li>
-              </ul>
+
+              <div class="mt-4 text-lg text-center text-red-850">
+                {{ error }}
+              </div>
+
               <div class="flex items-center justify-between my-4">
                 <div class="flex items-center">
                   <input
@@ -138,7 +138,7 @@ export default {
       password: '',
       password_confirmation: '',
       // state
-      errors: null,
+      error: null,
     };
   },
   methods: {
@@ -160,7 +160,7 @@ export default {
         this.$router.push({ name: 'Home' });
       } catch (err) {
         if (err.response) {
-          this.errors = err.response.data.message;
+          this.error = err.response.data.message;
         }
         console.log(err.message);
       }
