@@ -12,7 +12,7 @@
           placeholder="Поиск по сайту"
         />
       </div>
-      <CategoryGrid :categories="categories" />
+      <CategoryGrid :categories="parentcategories" />
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 // @ is an alias to /src
 // import store from '@/store.js';
 import CategoryGrid from '@/components/CategoryGrid.vue';
-import axios from 'axios';
+import service from '@/service.js';
 
 export default {
   name: 'home',
@@ -40,7 +40,7 @@ export default {
   methods: {
     async getCategories() {
       try {
-        const response = await axios.get('http://localhost/api/categories');
+        const response = await service.getCategories();
         this.$data.categories = response.data;
       } catch (err) {
         if (err.response) {
@@ -48,6 +48,14 @@ export default {
         }
         console.log(err.message);
       }
+    },
+  },
+  computed: {
+    parentcategories() {
+      const categories = this.categories.filter(
+        (category) => category.parent_id === null
+      );
+      return categories;
     },
   },
 };

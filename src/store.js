@@ -120,7 +120,7 @@ export default {
   ],
   products: [
     {
-      name: 'ПРОМА ЭКЛЕР',
+      name: 'прома эклер',
       slug: 'proma-ekler',
       id: 1,
       images: [

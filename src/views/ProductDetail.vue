@@ -88,6 +88,7 @@ import TheSwiperSlider from '@/components/TheSwiperSlider.vue';
 import TheReviews from '@/components/TheReviews.vue';
 import TheQuestions from '@/components/TheQuestions.vue';
 import RecipeGrid from '@/components/RecipeGrid.vue';
+import axios from 'axios';
 export default {
   data() {
     return {

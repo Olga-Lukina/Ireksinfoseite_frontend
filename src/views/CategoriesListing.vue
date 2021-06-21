@@ -9,25 +9,26 @@
           alt="chevron_left"
         />
         <span class="mr-auto text-center s:mr-4">{{
-          parentCategory.name
+          parentCategory?.name
         }}</span>
       </a>
-      <CategoryGrid :categories="categories" />
+      <CategoryGrid :categories="subcategories" />
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios';
+import service from '@/service.js';
 import CategoryGrid from '@/components/CategoryGrid.vue';
 export default {
+  name: 'home',
+  components: {
+    CategoryGrid,
+  },
   data() {
     return {
       categories: [],
       error: null,
     };
-  },
-  components: {
-    CategoryGrid,
   },
   mounted() {
     this.getCategories();
@@ -35,10 +36,9 @@ export default {
   methods: {
     async getCategories() {
       try {
-        const response = await axios.get(
-          'http://localhost/api/categories/{id}'
-        );
-        this.$data.categories = response.data;
+        const response = await service.getCategories();
+        this.categories = response.data;
+        console.log('micado', JSON.stringify(this.categories));
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;
@@ -51,25 +51,44 @@ export default {
     },
   },
   computed: {
+    subcategories() {
+      const categories = this.categories.filter(
+        (category) => category.parent_id === this.parentCategory.id
+      );
+      console.log(this.$route.params.slug);
+      return categories;
+    },
     parentCategory() {
       return this.categories.find(
         (category) => category.slug === this.$route.params.slug
       );
     },
   },
-  // computed: {
-  // categories() {
-  //   const categories = store.categories.filter(
-  //     (category) => category.parentslug === this.$route.params.slug
-  //   );
-  //   console.log(this.$route.params.slug);
-  //   return categories;
-  // },
-  //   parentCategory() {
-  //     return store.categories.find(
-  //       (category) => category.slug === this.$route.params.slug
-  //     );
-  //   },
-  // },
 };
+
+// created() {
+//   axios
+//     .get('http://localhost/api/categories/{id}')
+//     .then((response) => {
+//       this.categories = response.data;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// },
+
+// computed: {
+// categories() {
+//   const categories = store.categories.filter(
+//     (category) => category.parentslug === this.$route.params.slug
+//   );
+//   console.log(this.$route.params.slug);
+//   return categories;
+// },
+//   parentCategory() {
+//     return store.categories.find(
+//       (category) => category.slug === this.$route.params.slug
+//     );
+//   },
+// },
 </script>

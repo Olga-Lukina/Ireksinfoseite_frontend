@@ -15,7 +15,7 @@
             <router-link :to="productlink(product)">
               <img
                 class="object-cover w-full h-40 border s:h-44 l:h-64 rounded-2xl"
-                :src="require(`/public/images_slider/${product.images[0]}`)"
+                :src="require(`/public/images_slider/${product.images}`)"
                 :alt="product.name"
               />
             </router-link>
