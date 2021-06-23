@@ -5,10 +5,8 @@
     >
       <h3 class="m-4 font-extrabold uppercase text-red-850">Отзывы:</h3>
       <ul>
-        <li v-for="(review, index) in reviews" :key="index">
-          {{ review.name }} gave this {{ review.rating }} stars
-          <br />
-          "{{ review.content }}"
+        <li v-for="(question, index) in questions" :key="index">
+          "{{ question.question }}"
           <br />
         </li>
       </ul>
@@ -18,10 +16,7 @@
 
 <script>
 export default {
-  props: {
-    reviews: Array,
-  },
-  data() {
+  setup() {
     return {};
   },
 };

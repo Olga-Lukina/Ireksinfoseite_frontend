@@ -19,4 +19,17 @@ export default {
   getProductsInCategory(category_id) {
     return apiClient.get('/products/incategory/' + category_id);
   },
+  getProductDetail(id) {
+    return apiClient.get('/products/' + id);
+  },
+
+  getReviews() {
+    return apiClient.get('/reviews');
+  },
+  addReviews(reviewdata) {
+    return apiClient.post('/reviews', reviewdata);
+  },
+  getQuestions() {
+    return apiClient.get('/questions');
+  },
 };

@@ -1,6 +1,6 @@
 <template>
   <!--Slider-->
-  <div class="container mx-auto m:max-w-s">
+  <div v-if="product" class="container mx-auto m:max-w-s">
     <div class="relative">
       <TheSwiperSlider :images="product.images" />
       <a
@@ -45,7 +45,7 @@
     <h2 class="m-4 font-extrabold uppercase text-red-850">
       Рецеатуры использования:
     </h2>
-    <RecipeGrid :recipes="recipes" />
+    <RecipeGrid :recipes="product.recipes" />
     <!--TU-->
     <div
       class="flex justify-between m-2 bg-white border border-white shadow-md"
@@ -71,7 +71,11 @@
         Проекты маркетинговой поддержки:
       </h2>
     </div>
-    <TheReviews @review-submitted="addReview" />
+    <TheReviews
+      @review-submitted="addReview"
+      :productslug="product.slug"
+      :reviews="product.reviews"
+    />
     <TheQuestions />
     <!--can be intresting-->
     <div>
@@ -88,11 +92,12 @@ import TheSwiperSlider from '@/components/TheSwiperSlider.vue';
 import TheReviews from '@/components/TheReviews.vue';
 import TheQuestions from '@/components/TheQuestions.vue';
 import RecipeGrid from '@/components/RecipeGrid.vue';
-import axios from 'axios';
+import service from '@/service.js';
 export default {
+  props: ['id'],
   data() {
     return {
-      reviews: [],
+      product: null,
     };
   },
   components: {
@@ -101,28 +106,56 @@ export default {
     TheReviews,
     TheQuestions,
   },
+  mounted() {
+    this.getProductDetail();
+  },
   computed: {
-    product() {
-      const product = store.products.find(
-        (product) => product.slug === this.$route.params.productSlug
-      );
-      console.log(product);
-      return product;
-    },
-    recipes() {
-      const recipes = store.recipes.filter(
-        (recipe) => recipe.productslug === this.$route.params.productSlug
-      );
-      console.log(recipes);
-      return recipes;
-    },
+    // product() {
+    //   const product = store.products.find(
+    //     (product) => product.slug === this.$route.params.productSlug
+    //   );
+    //   console.log(product);
+    //   return product;
+    // // },
+    // recipes() {
+    //   const recipes = store.recipes.filter(
+    //     (recipe) => recipe.productslug === this.$route.params.productSlug
+    //   );
+    //   console.log(recipes);
+    //   return recipes;
+    // },
   },
   methods: {
+    async getProductDetail() {
+      try {
+        const response = await service.getProductDetail(
+          this.$route.params.slug
+        );
+        this.product = response.data;
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data.message;
+        }
+        console.log(err.message);
+      }
+    },
+
     goBack() {
       this.$router.go(-1);
     },
-    addReview(review) {
-      this.reviews.push(review);
+
+    async addReview(review) {
+      review.product_id = this.product.id;
+      try {
+        const response = await service.addReviews(review);
+        this.getProductDetail();
+        this.$router.push('/review/' + this.product.slug);
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data.message;
+        }
+        console.log(err.message);
+      }
     },
   },
 };

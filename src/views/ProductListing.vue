@@ -53,14 +53,6 @@ export default {
     },
   },
   computed: {
-    // products() {
-    //   const products = store.products.filter(
-    //     (product) =>
-    //       product.categoryslug === this.$route.params.subcategoriesSlug
-    //   );
-    //   console.log(products);
-    //   return products;
-    // },
     parentCategory() {
       const category = store.categories.find(
         (category) => category.slug === this.$route.params.subcategoriesSlug

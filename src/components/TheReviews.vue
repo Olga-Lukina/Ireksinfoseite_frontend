@@ -1,13 +1,13 @@
 <template>
   <!--reviews -->
   <router-link
-    to="/review"
+    :to="'/review/' + productslug"
     class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
   >
     <h2 class="m-4 font-extrabold uppercase text-red-850">
       Отзывы:
     </h2>
-    <p>всего 19</p>
+    <p>всего {{ reviews?.length }}</p>
     <img
       class="m-4 transform rotate-180"
       src="@/assets/images/chevron_left.svg"
@@ -37,7 +37,7 @@
     <label for="review">Написать отзыв:</label>
     <div class="relative h-full">
       <textarea
-        v-model="review"
+        v-model="content"
         class="w-full mx-auto my-4 border rounded-t resize-y review h-36"
       ></textarea>
       <button
@@ -54,10 +54,14 @@
 <script>
 export default {
   // bind to data
+  props: {
+    productslug: String,
+    reviews: Array,
+  },
   data() {
     return {
       name: '',
-      review: '',
+      content: '',
       rating: null,
     };
   },
@@ -65,13 +69,14 @@ export default {
     onSubmit() {
       let productReview = {
         name: this.name,
-        review: this.review,
+        content: this.content,
         rating: this.rating,
       };
+      console.log(productReview);
       // review sending to product
       this.$emit('review-submitted', productReview);
       this.name = '';
-      this.review = '';
+      this.content = '';
       this.rating = null;
     },
   },

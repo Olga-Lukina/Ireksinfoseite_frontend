@@ -15,12 +15,13 @@
     />
   </router-link>
   <!-- ask question -->
-  <div class="m-4">
+  <form action="post" class="m-4 review-form" @submit.prevent="onSubmit">
     <h2 class="my-4 font-extrabold text-center uppercase text-red-850">
       Задать свой вопрос о продукте:
     </h2>
     <div class="relative h-full">
       <textarea
+        v-model="question"
         class="w-full mx-auto border rounded-t resize-y h-36"
       ></textarea>
       <button
@@ -29,13 +30,25 @@
         Отправить
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
 export default {
-  setup() {
-    return {};
+  data() {
+    return {
+      question: '',
+    };
+  },
+  methods: {
+    onSubmit() {
+      let productQuestion = {
+        question: this.question,
+      };
+      // review sending to product
+      this.$emit('question-submitted', productQuestion);
+      this.question = '';
+    },
   },
 };
 </script>

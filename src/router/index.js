@@ -36,7 +36,7 @@ const routes = [
     // meta: { requiresAuth: true },
   },
   {
-    path: '/review',
+    path: '/review/:slug',
     name: 'Review',
     component: () =>
       import(/* webpackChunkName: "location"*/ '../views/Review'),
@@ -58,14 +58,14 @@ const routes = [
       import(/* webpackChunkName: "subcategories"*/ '../views/ProductListing'),
   },
   {
-    path: '/products/:productSlug',
+    path: '/products/:slug',
     name: 'ProductDetail',
     props: true,
     component: () =>
       import(/* webpackChunkName: "subcategories"*/ '../views/ProductDetail'),
   },
   {
-    path: '/recipes/:recipeSlug',
+    path: '/recipes/:id',
     name: 'RecipeDetail',
     props: true,
     component: () =>
