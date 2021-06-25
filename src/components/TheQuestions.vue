@@ -1,13 +1,13 @@
 <template>
   <!-- questions -->
   <router-link
-    to="/question"
+    :to="'/question/' + productslug"
     class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
   >
     <h2 class="m-4 font-extrabold uppercase text-red-850">
       Вопросы:
     </h2>
-    <p>всего 10</p>
+    <p>всего {{ questions?.length }}</p>
     <img
       class="m-4 transform rotate-180"
       src="@/assets/images/chevron_left.svg"
@@ -21,7 +21,7 @@
     </h2>
     <div class="relative h-full">
       <textarea
-        v-model="question"
+        v-model="content"
         class="w-full mx-auto border rounded-t resize-y h-36"
       ></textarea>
       <button
@@ -35,19 +35,24 @@
 
 <script>
 export default {
+  props: {
+    productslug: String,
+    questions: Array,
+  },
   data() {
     return {
-      question: '',
+      content: '',
     };
   },
   methods: {
     onSubmit() {
       let productQuestion = {
-        question: this.question,
+        content: this.content,
       };
+      console.log(productQuestion);
       // review sending to product
       this.$emit('question-submitted', productQuestion);
-      this.question = '';
+      this.content = '';
     },
   },
 };

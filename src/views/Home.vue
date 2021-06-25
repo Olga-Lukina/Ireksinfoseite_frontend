@@ -2,18 +2,25 @@
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
     <div class="container mx-auto">
       <!--seach-->
-      <div class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl ">
+      <form
+        @submit.prevent="submitted"
+        class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl"
+      >
         <span class="flex items-center justify-end w-auto p-1 text-gray-500">
           <img src="@/assets/images/search.svg" alt="seach" />
         </span>
         <input
+          v-model="search"
           class="w-full p-1 rounded"
           type="text"
           placeholder="Поиск по сайту"
         />
-      </div>
-      <CategoryGrid :categories="parentcategories" />
+        <button class="p-2 mr-2 border border-red-800 rounded-xl">
+          поиск
+        </button>
+      </form>
     </div>
+    <CategoryGrid :categories="parentcategories" />
   </div>
 </template>
 
@@ -31,11 +38,13 @@ export default {
   data() {
     return {
       categories: [],
+      search: '',
       error: null,
     };
   },
   mounted() {
     this.getCategories();
+    // this.search();
   },
   methods: {
     async getCategories() {
@@ -49,6 +58,17 @@ export default {
         console.log(err.message);
       }
     },
+    // async submitted() {
+    //   try {
+    //     const response = await service.search(this.$route.params.product_name);
+    //     this.search = response.data;
+    //   } catch (err) {
+    //     if (err.response) {
+    //       this.error = err.response.data.message;
+    //     }
+    //     console.log(err.message);
+    //   }
+    // },
   },
   computed: {
     parentcategories() {

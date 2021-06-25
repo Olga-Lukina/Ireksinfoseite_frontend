@@ -1,5 +1,7 @@
 <template>
-  <TheQuestionList :questions="questions" />
+  <div v-if="questions">
+    <TheQuestionList :questions="questions" />
+  </div>
 </template>
 
 <script>

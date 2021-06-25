@@ -32,4 +32,10 @@ export default {
   getQuestions() {
     return apiClient.get('/questions');
   },
+  addQuestions(questiondata) {
+    return apiClient.post('/questions', questiondata);
+  },
+  search(product_name) {
+    return apiClient.get('products/search/' + product_name);
+  },
 };

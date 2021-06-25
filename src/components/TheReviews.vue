@@ -29,11 +29,7 @@
       <option>2</option>
       <option>1</option>
     </select>
-    <input
-      v-model="name"
-      placeholder="Имя"
-      class="block w-full p-3 mb-4 border rounded name border-grey-light"
-    />
+    <br />
     <label for="review">Написать отзыв:</label>
     <div class="relative h-full">
       <textarea
@@ -60,7 +56,6 @@ export default {
   },
   data() {
     return {
-      name: '',
       content: '',
       rating: null,
     };
@@ -68,14 +63,12 @@ export default {
   methods: {
     onSubmit() {
       let productReview = {
-        name: this.name,
         content: this.content,
         rating: this.rating,
       };
       console.log(productReview);
       // review sending to product
       this.$emit('review-submitted', productReview);
-      this.name = '';
       this.content = '';
       this.rating = null;
     },

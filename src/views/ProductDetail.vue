@@ -46,9 +46,10 @@
       Рецеатуры использования:
     </h2>
     <RecipeGrid :recipes="product.recipes" />
-    <!--TU-->
+    <!--TU accordion-->
     <div
-      class="flex justify-between m-2 bg-white border border-white shadow-md"
+      @click="toggle"
+      class="flex justify-between m-2 bg-white border border-white shadow-md accordion"
     >
       <h2 class="m-4 font-extrabold uppercase text-red-850">
         Разработанные ТУ:
@@ -59,6 +60,11 @@
         alt="chevron_left"
       />
     </div>
+    <ul v-show="showcontent" class="content">
+      <li v-for="(showcontent, index) in showcontents" :key="index"></li>
+      <li class="m-4">технические условия 1</li>
+      <li class="m-4">технические условия 1</li>
+    </ul>
     <!--Videorecepies-->
     <div>
       <h2 class="m-4 font-extrabold uppercase text-red-850">
@@ -76,7 +82,11 @@
       :productslug="product.slug"
       :reviews="product.reviews"
     />
-    <TheQuestions />
+    <TheQuestions
+      @question-submitted="addQuestion"
+      :productslug="product.slug"
+      :questions="product.questions"
+    />
     <!--can be intresting-->
     <div>
       <h2 class="m-4 font-extrabold uppercase text-red-850">
@@ -87,7 +97,6 @@
 </template>
 
 <script>
-import store from '@/store';
 import TheSwiperSlider from '@/components/TheSwiperSlider.vue';
 import TheReviews from '@/components/TheReviews.vue';
 import TheQuestions from '@/components/TheQuestions.vue';
@@ -98,6 +107,7 @@ export default {
   data() {
     return {
       product: null,
+      showcontent: false,
     };
   },
   components: {
@@ -109,23 +119,11 @@ export default {
   mounted() {
     this.getProductDetail();
   },
-  computed: {
-    // product() {
-    //   const product = store.products.find(
-    //     (product) => product.slug === this.$route.params.productSlug
-    //   );
-    //   console.log(product);
-    //   return product;
-    // // },
-    // recipes() {
-    //   const recipes = store.recipes.filter(
-    //     (recipe) => recipe.productslug === this.$route.params.productSlug
-    //   );
-    //   console.log(recipes);
-    //   return recipes;
-    // },
-  },
+  computed: {},
   methods: {
+    toggle() {
+      this.showcontent = !this.showcontent;
+    },
     async getProductDetail() {
       try {
         const response = await service.getProductDetail(
@@ -150,6 +148,19 @@ export default {
         const response = await service.addReviews(review);
         this.getProductDetail();
         this.$router.push('/review/' + this.product.slug);
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data.message;
+        }
+        console.log(err.message);
+      }
+    },
+    async addQuestion(question) {
+      question.product_id = this.product.id;
+      try {
+        const response = await service.addQuestions(question);
+        this.getProductDetail();
+        this.$router.push('/question/' + this.product.slug);
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;
