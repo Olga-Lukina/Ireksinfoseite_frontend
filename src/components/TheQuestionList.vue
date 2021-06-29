@@ -22,9 +22,6 @@ export default {
   props: {
     questions: Array,
   },
-  setup() {
-    return {};
-  },
 };
 </script>
 

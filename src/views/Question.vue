@@ -8,7 +8,7 @@
 import service from '@/service.js';
 import TheQuestionList from '@/components/TheQuestionList.vue';
 export default {
-  setup() {
+  data() {
     return {
       questions: [],
     };
@@ -22,10 +22,11 @@ export default {
   methods: {
     async getQuestions() {
       try {
-        const response = await service.getQuestions(
-          this.$route.params.product_id
+        const response = await service.getProductDetail(
+          this.$route.params.slug
         );
-        this.questions = response.data;
+        console.log(response.data);
+        this.questions = response.data.questions;
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;

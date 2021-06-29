@@ -17,8 +17,8 @@
         /></router-link>
       </li>
       <li v-if="!loggedIn">
-        <router-link to="/register"
-          ><img src="@/assets/images/register.svg" alt="register"
+        <router-link to="/login"
+          ><img src="@/assets/images/login.svg" alt="login"
         /></router-link>
       </li>
       <button v-else type="button" class="logoutButton" @click="logout">

@@ -1,6 +1,6 @@
 <template>
   <!--Slider-->
-  <div v-if="product" class="container mx-auto m:max-w-s">
+  <div v-if="product" class="container mx-auto">
     <div class="relative">
       <TheSwiperSlider :images="product.images" />
       <a
@@ -61,9 +61,9 @@
       />
     </div>
     <ul v-show="showcontent" class="content">
-      <li v-for="(showcontent, index) in showcontents" :key="index"></li>
-      <li class="m-4">технические условия 1</li>
-      <li class="m-4">технические условия 1</li>
+      <li class="m-4" v-for="(sheet, index) in techshits" :key="index">
+        {{ sheet }}
+      </li>
     </ul>
     <!--Videorecepies-->
     <div>
@@ -82,6 +82,7 @@
       :productslug="product.slug"
       :reviews="product.reviews"
     />
+    <div class="h-4 mx-2 my-8 bg-gray-200"></div>
     <TheQuestions
       @question-submitted="addQuestion"
       :productslug="product.slug"
@@ -93,6 +94,7 @@
         Вас так же может заинтересовать:
       </h2>
     </div>
+    <ProductGrid :products="product.recommendedItems" />
   </div>
 </template>
 
@@ -102,12 +104,15 @@ import TheReviews from '@/components/TheReviews.vue';
 import TheQuestions from '@/components/TheQuestions.vue';
 import RecipeGrid from '@/components/RecipeGrid.vue';
 import service from '@/service.js';
+import ProductGrid from '@/components/ProductGrid.vue';
 export default {
   props: ['id'],
   data() {
     return {
       product: null,
+
       showcontent: false,
+      error: null,
     };
   },
   components: {
@@ -115,11 +120,17 @@ export default {
     TheSwiperSlider,
     TheReviews,
     TheQuestions,
+    ProductGrid,
   },
   mounted() {
     this.getProductDetail();
   },
-  computed: {},
+  computed: {
+    techshits() {
+      console.log(this.product.techshits);
+      return this.product.techshits.split(', ');
+    },
+  },
   methods: {
     toggle() {
       this.showcontent = !this.showcontent;

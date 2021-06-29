@@ -12,7 +12,11 @@
           ><img class="" src="@/assets/images/home.svg" alt="home"
         /></router-link>
         <div class="border-l border-red-800 vl"></div>
-        <img src="@/assets/images/topup.svg" alt="topup" />
+        <div class="scroll-to-top">
+          <button @click="scrollToTop">
+            <img src="@/assets/images/topup.svg" alt="topup" />
+          </button>
+        </div>
       </div>
     </div>
     <!--Sotial Media-->
@@ -33,7 +37,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    scrollToTop() {
+      let currentScroll = document.documentElement.scrollTop,
+        int = setInterval(frame, 6);
+
+      function frame() {
+        if (0 > currentScroll) clearInterval(int);
+        else {
+          currentScroll = currentScroll - 12;
+          document.documentElement.scrollTop = currentScroll;
+        }
+      }
+    },
+  },
+};
 </script>
 
 <style scoped></style>

@@ -19,8 +19,8 @@
           поиск
         </button>
       </form>
+      <CategoryGrid :categories="parentcategories" />
     </div>
-    <CategoryGrid :categories="parentcategories" />
   </div>
 </template>
 
@@ -58,17 +58,6 @@ export default {
         console.log(err.message);
       }
     },
-    // async submitted() {
-    //   try {
-    //     const response = await service.search(this.$route.params.product_name);
-    //     this.search = response.data;
-    //   } catch (err) {
-    //     if (err.response) {
-    //       this.error = err.response.data.message;
-    //     }
-    //     console.log(err.message);
-    //   }
-    // },
   },
   computed: {
     parentcategories() {

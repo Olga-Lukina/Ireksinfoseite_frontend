@@ -19,8 +19,8 @@ export default {
   getProductsInCategory(category_id) {
     return apiClient.get('/products/incategory/' + category_id);
   },
-  getProductDetail(id) {
-    return apiClient.get('/products/' + id);
+  getProductDetail(slug) {
+    return apiClient.get('/products/' + slug);
   },
 
   getReviews() {
