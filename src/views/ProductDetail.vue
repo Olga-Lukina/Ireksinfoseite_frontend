@@ -61,7 +61,7 @@
       />
     </div>
     <ul v-show="showcontent" class="content">
-      <li class="m-4" v-for="(sheet, index) in techshits" :key="index">
+      <li class="m-4" v-for="(sheet, index) in techsheets" :key="index">
         {{ sheet }}
       </li>
     </ul>
@@ -110,7 +110,6 @@ export default {
   data() {
     return {
       product: null,
-
       showcontent: false,
       error: null,
     };
@@ -126,9 +125,9 @@ export default {
     this.getProductDetail();
   },
   computed: {
-    techshits() {
-      console.log(this.product.techshits);
-      return this.product.techshits.split(', ');
+    techsheets() {
+      console.log(this.product.techsheets);
+      return this.product.techsheets.split(', ');
     },
   },
   methods: {

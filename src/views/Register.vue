@@ -126,6 +126,7 @@
 <script>
 import axios from 'axios';
 export default {
+  inject: ['GStore'],
   data() {
     return {
       // form state
@@ -157,6 +158,10 @@ export default {
         localStorage.setItem('token', data.data.token);
         this.$store.commit('SET_LOGGED_IN', true);
         this.$store.commit('SET_USER_DATA', data.data.user);
+        this.GStore.flashMessage = 'You are successfully registerd';
+        setTimeout(() => {
+          this.GStore.flashMessage = '';
+        }, 3000);
         this.$router.push({ name: 'Home' });
       } catch (err) {
         if (err.response) {

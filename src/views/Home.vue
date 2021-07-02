@@ -2,6 +2,12 @@
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
     <div class="container mx-auto">
       <!--seach-->
+      <div
+        class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
+        v-if="GStore.flashMessage"
+      >
+        {{ GStore.flashMessage }}
+      </div>
       <form
         @submit.prevent="submitted"
         class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl"
@@ -31,6 +37,7 @@ import CategoryGrid from '@/components/CategoryGrid.vue';
 import service from '@/service.js';
 
 export default {
+  inject: ['GStore'],
   name: 'home',
   components: {
     CategoryGrid,

@@ -37,12 +37,17 @@
 <script>
 import { authComputed } from '../helpers.js';
 export default {
+  inject: ['GStore'],
   computed: {
     ...authComputed,
   },
   methods: {
     logout() {
       this.$store.dispatch('logout');
+      this.GStore.flashMessage = 'You are logged out';
+      setTimeout(() => {
+        this.GStore.flashMessage = '';
+      }, 3000);
     },
   },
 };

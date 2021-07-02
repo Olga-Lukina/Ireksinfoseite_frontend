@@ -10,8 +10,8 @@
           <figure>
             <router-link :to="recipelink(recipe)">
               <img
-                class="mb-2 border rounded-2xl"
-                :src="require(`@/assets/images/${recipe.image}`)"
+                class="object-cover w-full mb-2 border h-28 s:h-44 l:h-64 rounded-2xl"
+                :src="`http://localhost/storage/${recipe.image}`"
                 :alt="recipe.name"
               />
             </router-link>

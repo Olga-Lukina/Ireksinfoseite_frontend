@@ -1,9 +1,12 @@
-import { createApp } from 'vue';
+import { createApp, reactive } from 'vue';
 import App from './App.vue';
 import './assets/css/tailwind.css';
 import router from './router';
 import { createStore } from 'vuex';
 import axios from 'axios';
+
+// using reactiv method for flash massages
+const GStore = reactive({ flashMessage: '' });
 
 const store = createStore({
   state: {
@@ -69,4 +72,5 @@ const store = createStore({
 createApp(App)
   .use(router)
   .use(store)
+  .provide('GStore', GStore)
   .mount('#app');

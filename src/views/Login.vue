@@ -9,6 +9,7 @@
             class="w-full px-6 py-8 text-black rounded shadow-md rounded-t-3xl"
           >
             <h3 class="mb-8 text-3xl text-center">Войти</h3>
+
             <form @submit.prevent="login">
               <input
                 v-model="email"
@@ -63,6 +64,7 @@
 <script>
 import axios from 'axios';
 export default {
+  inject: ['GStore'],
   data() {
     return {
       email: '',
@@ -80,6 +82,11 @@ export default {
         localStorage.setItem('token', data.data.token);
         this.$store.commit('SET_LOGGED_IN', true);
         this.$store.commit('SET_USER_DATA', data.data.user);
+
+        this.GStore.flashMessage = 'You are successfully logged in';
+        setTimeout(() => {
+          this.GStore.flashMessage = '';
+        }, 3000);
         this.$router.push({ name: 'Home' });
       } catch (err) {
         if (err.response) {

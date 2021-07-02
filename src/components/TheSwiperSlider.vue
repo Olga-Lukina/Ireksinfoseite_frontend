@@ -3,7 +3,7 @@
     <swiper-slide v-for="image of images" :key="image"
       ><img
         class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
-        :src="`/images_slider/${image}`"
+        :src="`http://localhost/storage/${image}`"
     /></swiper-slide>
   </swiper>
 
@@ -21,13 +21,12 @@
       :key="image"
       ><img
         class="object-cover w-full h-32 rounded-xl"
-        :src="`/images_slider/${image}`"
+        :src="`http://localhost/storage/${image}`"
     /></swiper-slide>
   </swiper>
 </template>
 
 <script>
-import store from '@/store';
 // import Swiper core and required modules
 import SwiperCore, { Thumbs } from 'swiper';
 
@@ -75,6 +74,12 @@ export default {
       required: true,
     },
   },
+  // computed: {
+  //   image() {
+  //     console.log(this.product.image);
+  //     return this.product.image.split(', ');
+  //   },
+  // },
   methods: {
     setThumbsSwiper(swiper) {
       this.thumbsSwiper = swiper;
