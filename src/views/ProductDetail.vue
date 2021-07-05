@@ -95,6 +95,25 @@
       </h2>
     </div>
     <ProductGrid :products="product.recommendedItems" />
+    <!--generate qr code-->
+    <div class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl">
+      <input
+        v-model="website"
+        class="w-full p-1 rounded"
+        type="text"
+        placeholder="type product URL"
+      />
+      <button
+        class="p-2 text-white rounded-2xl bg-red-850 border-1 hover:bg-red-700"
+        @click="generateQrCode"
+        :disabled="isWebsite()"
+      >
+        Generate QR-Code
+      </button>
+    </div>
+    <div v-if="generatedQrCodeUrl">
+      <img :src="generatedQrCodeUrl" class="m-4 mx-auto" />
+    </div>
   </div>
 </template>
 
@@ -112,6 +131,8 @@ export default {
       product: null,
       showcontent: false,
       error: null,
+      website: '',
+      generatedQrCodeUrl: '',
     };
   },
   components: {
@@ -177,6 +198,14 @@ export default {
         }
         console.log(err.message);
       }
+    },
+    generateQrCode() {
+      this.generatedQrCodeUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${this.website}!&size=300x300`;
+    },
+    isWebsite() {
+      /* eslint-disable-next-line */
+      const regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g;
+      return this.website.match(regex) === null;
     },
   },
 };
