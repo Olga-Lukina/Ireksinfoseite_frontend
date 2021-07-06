@@ -43,16 +43,16 @@
     </div>
     <!--Recepies-->
     <h2 class="m-4 font-extrabold uppercase text-red-850">
-      Рецеатуры использования:
+      Product recipes:
     </h2>
     <RecipeGrid :recipes="product.recipes" />
-    <!--TU accordion-->
+    <!--Techsheets accordion-->
     <div
       @click="toggle"
       class="flex justify-between m-2 bg-white border border-white shadow-md accordion"
     >
       <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Разработанные ТУ:
+        Techsheets:
       </h2>
       <img
         class="m-4 transform -rotate-90"
@@ -68,13 +68,13 @@
     <!--Videorecepies-->
     <div>
       <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Видеорецепты:
+        Videorecepies:
       </h2>
     </div>
     <!--Marketing-->
     <div>
       <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Проекты маркетинговой поддержки:
+        Marketing projects:
       </h2>
     </div>
     <TheReviews
@@ -91,7 +91,7 @@
     <!--can be intresting-->
     <div>
       <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Вас так же может заинтересовать:
+        Can be intresting:
       </h2>
     </div>
     <ProductGrid :products="product.recommendedItems" />
@@ -191,11 +191,6 @@ export default {
     },
     generateQrCode() {
       this.generatedQrCodeUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${window.location.href}!&size=300x300`;
-    },
-    isWebsite() {
-      /* eslint-disable-next-line */
-      const regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/g;
-      return this.website.match(regex) === null;
     },
   },
 };

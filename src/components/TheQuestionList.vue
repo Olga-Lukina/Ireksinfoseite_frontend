@@ -3,7 +3,7 @@
     <div
       class="m-2 bg-white border border-white shadow-md review-container rounded-xl"
     >
-      <h3 class="m-4 font-extrabold uppercase text-red-850">Вопрос:</h3>
+      <h3 class="m-4 font-extrabold uppercase text-red-850">Questions:</h3>
       <ul>
         <li
           class="m-4 bg-white border border-white shadow-xl review-container rounded-xl"

@@ -5,9 +5,9 @@
     class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
   >
     <h2 class="m-4 font-extrabold uppercase text-red-850">
-      Отзывы:
+      Reviews:
     </h2>
-    <p>всего {{ reviews?.length }}</p>
+    <p>total {{ reviews?.length }}</p>
     <img
       class="m-4 transform rotate-180"
       src="@/assets/images/chevron_left.svg"
@@ -18,9 +18,9 @@
   <!-- live review -->
   <form action="post" class="m-4 review-form" @submit.prevent="onSubmit">
     <h2 class="my-4 font-extrabold text-center uppercase text-red-850">
-      Оставить свой отзыв о продукте:
+      Live your reviews:
     </h2>
-    <label for="rating">Ваша отценка:</label>
+    <label for="rating">Your rating:</label>
     <select class="m-4 reting" v-model.number="rating">
       <!-- add 2-way binding -->
       <option>5</option>
@@ -30,7 +30,7 @@
       <option>1</option>
     </select>
     <br />
-    <label for="review">Написать отзыв:</label>
+    <label for="review"> Live your review:</label>
     <div class="relative h-full">
       <textarea
         v-model="content"
@@ -41,7 +41,7 @@
         type="submit"
         value="Submit"
       >
-        Отправить
+        Send
       </button>
     </div>
   </form>

@@ -8,14 +8,14 @@
           <div
             class="w-full px-6 py-8 text-black rounded shadow-md rounded-t-3xl"
           >
-            <h3 class="mb-8 text-3xl text-center">Регистрация</h3>
+            <h3 class="mb-8 text-3xl text-center">Register</h3>
             <form action="post" @submit.prevent="register">
               <input
                 v-model="name"
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="name"
-                placeholder="Имя"
+                placeholder="Name"
                 value
               />
               <input
@@ -23,7 +23,7 @@
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="surname"
-                placeholder="Фамилия"
+                placeholder="Surname"
                 value
               />
               <input
@@ -31,7 +31,7 @@
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="telephone"
-                placeholder="Контактный телефон"
+                placeholder="Telephone"
                 value
               />
 
@@ -40,7 +40,7 @@
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="email"
-                placeholder="Контактный e-mail"
+                placeholder="E-mail"
                 value
               />
               <input
@@ -48,7 +48,7 @@
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="companyname"
-                placeholder="Название предприятия"
+                placeholder="Companyname"
                 value
               />
               <input
@@ -56,7 +56,7 @@
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="jobposition"
-                placeholder="Занимаемая должность"
+                placeholder="Jobposition"
                 value
               />
 
@@ -65,7 +65,7 @@
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="Password"
-                placeholder="Пароль"
+                placeholder="Password"
                 value
               />
               <input
@@ -73,7 +73,7 @@
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="password_confirmation"
-                placeholder="Подтвердить пароль"
+                placeholder="Password confirmation"
                 value
               />
 
@@ -82,7 +82,7 @@
                 name="button"
                 class="w-full py-3 my-1 text-center text-white rounded bg-red-850 border-1 hover:bg-red-700 "
               >
-                Отправить
+                Send
               </button>
 
               <div class="mt-4 text-lg text-center text-red-850">
@@ -97,11 +97,11 @@
                     name="save"
                     value="save"
                   />
-                  <label for="save" class="select-none">Запомнить</label>
+                  <label for="save" class="select-none">save</label>
                 </div>
 
                 <div class=" text-red-850">
-                  <router-link to="/login">войти</router-link>
+                  <router-link to="/login">login</router-link>
                 </div>
               </div>
             </form>
@@ -162,7 +162,7 @@ export default {
         setTimeout(() => {
           this.GStore.flashMessage = '';
         }, 3000);
-        this.$router.push({ name: 'Home' });
+        this.$router.go(-1);
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;

@@ -5,9 +5,9 @@
     class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
   >
     <h2 class="m-4 font-extrabold uppercase text-red-850">
-      Вопросы:
+      Questions:
     </h2>
-    <p>всего {{ questions?.length }}</p>
+    <p>total {{ questions?.length }}</p>
     <img
       class="m-4 transform rotate-180"
       src="@/assets/images/chevron_left.svg"
@@ -17,7 +17,7 @@
   <!-- ask question -->
   <form action="post" class="m-4 review-form" @submit.prevent="onSubmit">
     <h2 class="my-4 font-extrabold text-center uppercase text-red-850">
-      Задать свой вопрос о продукте:
+      Ask question about the product:
     </h2>
     <div class="relative h-full">
       <textarea
@@ -27,7 +27,7 @@
       <button
         class="absolute bottom-0 right-0 w-full p-2 text-white rounded-b bg-red-850 border-1 hover:bg-red-700"
       >
-        Отправить
+        Send
       </button>
     </div>
   </form>

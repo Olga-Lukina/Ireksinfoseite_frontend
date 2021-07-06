@@ -22,8 +22,6 @@
           placeholder="Поиск по сайту"
         />
       </form>
-      <!--show product items-->
-
       <ProductGrid :products="searchResults" />
       <CategoryGrid :categories="parentcategories" />
     </div>
@@ -70,6 +68,7 @@ export default {
       try {
         const response = await service.search(this.search);
         this.searchResults = response.data;
+        // this.$router.push({ name: 'Search' });
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;

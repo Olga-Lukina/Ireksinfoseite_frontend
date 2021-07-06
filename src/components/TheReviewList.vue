@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="m-4 font-extrabold text-center uppercase text-red-850">
-      Отзывы:
+      Reviews:
     </h3>
     <ul>
       <li
@@ -9,7 +9,7 @@
         v-for="(review, index) in reviews"
         :key="index"
       >
-        <p class="m-2 text-right text-red-850">{{ review.rating }} звезда</p>
+        <p class="m-2 text-right text-red-850">{{ review.rating }} star</p>
         <p class="m-2 text-center">"{{ review.content }}"</p>
       </li>
     </ul>

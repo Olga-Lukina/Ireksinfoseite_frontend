@@ -8,7 +8,7 @@
           <div
             class="w-full px-6 py-8 text-black rounded shadow-md rounded-t-3xl"
           >
-            <h3 class="mb-8 text-3xl text-center">Войти</h3>
+            <h3 class="mb-8 text-3xl text-center">Login</h3>
 
             <form @submit.prevent="login">
               <input
@@ -25,7 +25,7 @@
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="Password"
-                placeholder="Пароль"
+                placeholder="Password"
                 value
               />
 
@@ -34,13 +34,13 @@
                 name="button"
                 class="w-full py-3 my-1 text-center text-white rounded bg-red-850 border-1 hover:bg-red-700 bg-green hover:bg-green-dark focus:outline-none"
               >
-                Войти
+                Login
               </button>
               <div class="mt-4 text-lg text-center text-red-850">
                 {{ error }}
               </div>
               <div class="mt-6 text-red-850">
-                <router-link to="/register">Регистрация</router-link>
+                <router-link to="/register">Register</router-link>
               </div>
             </form>
             <div class="mt-4 text-sm text-center text-grey-dark">
@@ -87,7 +87,7 @@ export default {
         setTimeout(() => {
           this.GStore.flashMessage = '';
         }, 3000);
-        this.$router.push({ name: 'Home' });
+        this.$router.go(-1);
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;

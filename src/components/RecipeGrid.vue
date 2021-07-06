@@ -27,7 +27,7 @@
               name="button"
               class="w-full py-2 my-2 text-center bg-gray-100 rounded text-s text-red-850 border-1 hover:bg-gray-300 bg-green focus:outline-none"
             >
-              Посмотреть
+              Open
             </button>
           </router-link>
         </div>

@@ -28,6 +28,13 @@ const routes = [
     props: true,
   },
   {
+    path: '/search',
+    name: 'Search',
+    component: () =>
+      import(/* webpackChunkName: "location"*/ '../views/Search'),
+    props: true,
+  },
+  {
     path: '/question/:slug',
     name: 'Question',
     component: () =>
