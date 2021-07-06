@@ -75,9 +75,9 @@ export default {
     },
   },
   // computed: {
-  //   image() {
-  //     console.log(this.product.image);
-  //     return this.product.image.split(', ');
+  //   images() {
+  //     console.log(this.product.images);
+  //     return this.product.images.split(', ');
   //   },
   // },
   methods: {

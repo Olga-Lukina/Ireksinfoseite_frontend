@@ -30,6 +30,9 @@ const store = createStore({
     loggedIn(state) {
       return state.loggedIn;
     },
+    isAdmin(state) {
+      return state.user.role_id === 1;
+    },
   },
   actions: {
     // holding user data

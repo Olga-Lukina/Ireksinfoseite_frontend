@@ -96,23 +96,10 @@
     </div>
     <ProductGrid :products="product.recommendedItems" />
     <!--generate qr code-->
-    <div class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl">
-      <input
-        v-model="website"
-        class="w-full p-1 rounded"
-        type="text"
-        placeholder="type product URL"
-      />
-      <button
-        class="p-2 text-white rounded-2xl bg-red-850 border-1 hover:bg-red-700"
-        @click="generateQrCode"
-        :disabled="isWebsite()"
-      >
-        Generate QR-Code
-      </button>
-    </div>
-    <div v-if="generatedQrCodeUrl">
-      <img :src="generatedQrCodeUrl" class="m-4 mx-auto" />
+    <div>
+      <div v-if="generatedQrCodeUrl && loggedIn && isAdmin">
+        <img :src="generatedQrCodeUrl" class="m-4 mx-auto" />
+      </div>
     </div>
   </div>
 </template>
@@ -124,6 +111,7 @@ import TheQuestions from '@/components/TheQuestions.vue';
 import RecipeGrid from '@/components/RecipeGrid.vue';
 import service from '@/service.js';
 import ProductGrid from '@/components/ProductGrid.vue';
+import { authComputed } from '../helpers.js';
 export default {
   props: ['id'],
   data() {
@@ -144,12 +132,13 @@ export default {
   },
   mounted() {
     this.getProductDetail();
+    this.generateQrCode();
   },
   computed: {
     techsheets() {
-      console.log(this.product.techsheets);
       return this.product.techsheets.split(', ');
     },
+    ...authComputed,
   },
   methods: {
     toggle() {
@@ -160,6 +149,7 @@ export default {
         const response = await service.getProductDetail(
           this.$route.params.slug
         );
+        console.log(response.data);
         this.product = response.data;
       } catch (err) {
         if (err.response) {
@@ -200,7 +190,7 @@ export default {
       }
     },
     generateQrCode() {
-      this.generatedQrCodeUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${this.website}!&size=300x300`;
+      this.generatedQrCodeUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${window.location.href}!&size=300x300`;
     },
     isWebsite() {
       /* eslint-disable-next-line */

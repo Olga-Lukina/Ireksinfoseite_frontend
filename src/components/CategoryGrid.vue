@@ -31,7 +31,7 @@
               <span
                 class="p-1 m-1 text-xs text-gray-400 m-b-2 numberOfProducts"
               >
-                ({{ category.length }})</span
+                ({{ category.subcategory_count }})</span
               >
             </div>
           </div>

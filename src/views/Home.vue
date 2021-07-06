@@ -1,15 +1,15 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
     <div class="container mx-auto">
-      <!--seach-->
       <div
         class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
         v-if="GStore.flashMessage"
       >
         {{ GStore.flashMessage }}
       </div>
+      <!--seach-->
       <form
-        @submit.prevent="submitted"
+        @submit.prevent="searchProducts"
         class="flex p-2 m-2 mr-2 bg-white shadow rounded-2xl"
       >
         <span class="flex items-center justify-end w-auto p-1 text-gray-500">
@@ -21,43 +21,55 @@
           type="text"
           placeholder="Поиск по сайту"
         />
-        <button class="p-2 mr-2 border border-red-800 rounded-xl">
-          поиск
-        </button>
       </form>
+      <!--show product items-->
+
+      <ProductGrid :products="searchResults" />
       <CategoryGrid :categories="parentcategories" />
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import store from '@/store.js';
 import CategoryGrid from '@/components/CategoryGrid.vue';
 import service from '@/service.js';
+import ProductGrid from '@/components/ProductGrid.vue';
 
 export default {
   inject: ['GStore'],
   name: 'home',
   components: {
     CategoryGrid,
+    ProductGrid,
   },
   data() {
     return {
       categories: [],
       search: '',
+      searchResults: [],
       error: null,
     };
   },
   mounted() {
     this.getCategories();
-    // this.search();
+    this.searchProducts();
   },
   methods: {
     async getCategories() {
       try {
         const response = await service.getCategories();
         this.$data.categories = response.data;
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data.message;
+        }
+        console.log(err.message);
+      }
+    },
+    async searchProducts() {
+      try {
+        const response = await service.search(this.search);
+        this.searchResults = response.data;
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;
@@ -73,6 +85,11 @@ export default {
       );
       return categories;
     },
+    // getProductsInCategory() {
+    //   return this.product_name.filter((item) => {
+    //     return item.name.toLowerCase().includes(this.search.toLowerCase());
+    //   });
+    // },
   },
 };
 </script>
