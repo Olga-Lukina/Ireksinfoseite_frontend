@@ -20,26 +20,8 @@
     <p class="m-4">Сухая смесь для приготовления заварного полуфабриката.</p>
     <!-- stars rating -->
     <div class="flex items-center justify-between m-4">
-      <div class="flex items-center justify-start ">
-        <div
-          v-for="index in 5"
-          :key="index"
-          class="flex items-center mt-2 mb-4"
-        >
-          <button>
-            <svg
-              class="w-8 h-8 mx-1 text-yellow-500 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <p>5/5</p>
+      <StarRating :rating="3" />
+      <p>5/6</p>
     </div>
     <!--Recepies-->
     <h2 class="m-4 font-extrabold uppercase text-red-850">
@@ -65,17 +47,12 @@
         {{ sheet }}
       </li>
     </ul>
-    <!--Videorecepies-->
-    <div>
-      <h2 class="m-4 font-extrabold uppercase text-red-850">
-        Videorecepies:
-      </h2>
-    </div>
     <!--Marketing-->
-    <div>
+    <div v-if="product">
       <h2 class="m-4 font-extrabold uppercase text-red-850">
         Marketing projects:
       </h2>
+      <TheMarketingSlider :marketing="product.marketing" />
     </div>
     <TheReviews
       @review-submitted="addReview"
@@ -106,9 +83,11 @@
 
 <script>
 import TheSwiperSlider from '@/components/TheSwiperSlider.vue';
+import TheMarketingSlider from '@/components/TheMarketingSlider.vue';
 import TheReviews from '@/components/TheReviews.vue';
 import TheQuestions from '@/components/TheQuestions.vue';
 import RecipeGrid from '@/components/RecipeGrid.vue';
+import StarRating from '@/components/StarRating.vue';
 import service from '@/service.js';
 import ProductGrid from '@/components/ProductGrid.vue';
 import { authComputed } from '../helpers.js';
@@ -129,6 +108,8 @@ export default {
     TheReviews,
     TheQuestions,
     ProductGrid,
+    TheMarketingSlider,
+    StarRating,
   },
   mounted() {
     this.getProductDetail();

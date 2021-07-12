@@ -1,6 +1,6 @@
 <template>
   <swiper :thumbs="{ swiper: thumbsSwiper }">
-    <swiper-slide v-for="image of images" :key="image"
+    <swiper-slide v-for="image of parsedImages" :key="image"
       ><img
         class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
         :src="`http://localhost/storage/${image}`"
@@ -15,7 +15,7 @@
     :breakpoints="breakpoints"
   >
     <swiper-slide
-      v-for="image of images"
+      v-for="image of parsedImages"
       :loop="true"
       :virtualIndex="image"
       :key="image"
@@ -74,17 +74,20 @@ export default {
       required: true,
     },
   },
-  // computed: {
-  //   images() {
-  //     console.log(this.product.images);
-  //     return this.product.images.split(', ');
-  //   },
-  // },
+
   methods: {
     setThumbsSwiper(swiper) {
       this.thumbsSwiper = swiper;
     },
   },
+  computed: {
+    parsedImages() {
+      const parsedimages = JSON.parse(this.images);
+      console.log(this.images, parsedimages);
+      return parsedimages;
+    },
+  },
+
   params: {},
 };
 </script>

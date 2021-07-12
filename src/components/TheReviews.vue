@@ -23,15 +23,17 @@
     <label for="rating">Your rating:</label>
     <select class="m-4 reting" v-model.number="rating">
       <!-- add 2-way binding -->
-      <option>5</option>
-      <option>4</option>
-      <option>3</option>
-      <option>2</option>
-      <option>1</option>
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
     </select>
     <br />
+    <StarRating :rating="4" />
+    <br />
     <label for="review"> Live your review:</label>
-    <div class="relative h-full">
+    <div class="relative h-full ">
       <textarea
         v-model="content"
         class="w-full mx-auto my-4 border rounded-t resize-y review h-36"
@@ -48,11 +50,15 @@
 </template>
 
 <script>
+import StarRating from '@/components/StarRating.vue';
 export default {
   // bind to data
   props: {
     productslug: String,
     reviews: Array,
+  },
+  components: {
+    StarRating,
   },
   data() {
     return {
