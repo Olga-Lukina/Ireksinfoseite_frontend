@@ -30,7 +30,7 @@
       <option value="1">1</option>
     </select>
     <br />
-    <StarRating :rating="4" />
+    <StarRating :rating="rating" />
     <br />
     <label for="review"> Live your review:</label>
     <div class="relative h-full ">

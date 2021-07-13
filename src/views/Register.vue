@@ -9,6 +9,7 @@
             class="w-full px-6 py-8 text-black rounded shadow-md rounded-t-3xl"
           >
             <h3 class="mb-8 text-3xl text-center">Register</h3>
+
             <form action="post" @submit.prevent="register">
               <input
                 v-model="name"
@@ -18,6 +19,7 @@
                 placeholder="Name"
                 value
               />
+
               <input
                 v-model="surname"
                 type="text"
@@ -130,16 +132,19 @@ export default {
   data() {
     return {
       // form state
-      name: '',
-      surname: '',
-      telephone: '',
-      email: '',
-      companyname: '',
-      jobposition: '',
-      password: '',
-      password_confirmation: '',
-      // state
-      error: null,
+      formData: {
+        name: '',
+        surname: '',
+        telephone: '',
+        email: '',
+        companyname: '',
+        jobposition: '',
+        password: '',
+        password_confirmation: '',
+        // state
+        errors: null,
+        acceptTerms: null,
+      },
     };
   },
   methods: {

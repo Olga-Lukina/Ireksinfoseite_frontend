@@ -1,6 +1,6 @@
 <template>
   <!--Slider-->
-  <div v-if="product" class="container mx-auto">
+  <div v-if="product" class="container mx-auto xl:container xl:px-60">
     <div class="relative">
       <TheSwiperSlider :images="product.images" />
       <a
@@ -20,8 +20,8 @@
     <p class="m-4">Сухая смесь для приготовления заварного полуфабриката.</p>
     <!-- stars rating -->
     <div class="flex items-center justify-between m-4">
-      <StarRating :rating="3" />
-      <p>5/6</p>
+      <StarRating :rating="product.avgRating" />
+      <p>{{ roundedRating }}/{{ product.reviews.length }}</p>
     </div>
     <!--Recepies-->
     <h2 class="m-4 font-extrabold uppercase text-red-850">
@@ -120,6 +120,9 @@ export default {
       return this.product.techsheets.split(', ');
     },
     ...authComputed,
+    roundedRating() {
+      return parseFloat(this.product.avgRating).toFixed(2);
+    },
   },
   methods: {
     toggle() {

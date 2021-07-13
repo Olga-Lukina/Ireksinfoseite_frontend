@@ -5,16 +5,11 @@
       :key="marketingimage"
       ><img
         class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
-        :src="`http://localhost/storage/${marketing}`"
+        :src="`http://localhost/storage/${marketingimage}`"
     /></swiper-slide>
   </swiper>
 
-  <swiper
-    @swiper="setThumbsSwiper"
-    watch-slides-visibility
-    watch-slides-progress
-  >
-  </swiper>
+  <swiper watch-slides-visibility watch-slides-progress> </swiper>
 </template>
 
 <script>

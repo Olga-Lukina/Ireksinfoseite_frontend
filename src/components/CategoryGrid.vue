@@ -18,7 +18,7 @@
                 <router-link :to="categorylink(category)">
                   <img
                     class="border rounded-2xl"
-                    :src="require(`@/assets/images/${category.image}`)"
+                    :src="`http://localhost/storage/${category.image}`"
                     :alt="category.name"
                   />
                 </router-link>

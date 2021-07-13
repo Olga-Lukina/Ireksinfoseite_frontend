@@ -9,20 +9,27 @@
         v-for="(review, index) in reviews"
         :key="index"
       >
-        <p class="m-2 text-right text-red-850">{{ review.rating }} star</p>
-        <p class="m-2 text-center">"{{ review.content }}"</p>
+        <p class="m-4 text-left text-red-850">
+          <StarRating :rating="review.rating" />
+        </p>
+
+        <p class="m-4 text-center">"{{ review.content }}"</p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import StarRating from '@/components/StarRating.vue';
 export default {
   props: {
     reviews: Array,
   },
   data() {
     return {};
+  },
+  components: {
+    StarRating,
   },
 };
 </script>
