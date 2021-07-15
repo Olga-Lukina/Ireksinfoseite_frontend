@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
-    <div class="container">
+    <div class="container mx-auto">
       <div class="flex flex-col m-4 bg-grey-lighter">
         <div
           class="container flex flex-col items-center justify-center flex-1 max-w-sm px-2 mx-auto"
@@ -10,68 +10,73 @@
           >
             <h3 class="mb-8 text-3xl text-center">Register</h3>
 
-            <form action="post" @submit.prevent="register">
-              <input
-                v-model="name"
+            <Form
+              action="post"
+              @submit.prevent="register"
+              :validation-schema="schema"
+            >
+              <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
-                name="name"
+                name="person_name"
                 placeholder="Name"
                 value
               />
+              <ErrorMessage name="person_name" class="text-red-600" />
 
-              <input
-                v-model="surname"
+              <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
-                name="surname"
+                name="person_surname"
                 placeholder="Surname"
                 value
               />
-              <input
-                v-model="telephone"
+              <ErrorMessage name="person_surname" class="text-red-600" />
+
+              <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="telephone"
                 placeholder="Telephone"
                 value
               />
+              <ErrorMessage name="telephone" class="text-red-600" />
 
-              <input
-                v-model="email"
-                type="text"
+              <Field
+                type="email"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
-                name="email"
+                name="email_addr"
                 placeholder="E-mail"
                 value
               />
-              <input
-                v-model="companyname"
+              <ErrorMessage name="email_addr" class="text-red-600" />
+
+              <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="companyname"
                 placeholder="Companyname"
                 value
               />
-              <input
-                v-model="jobposition"
+              <ErrorMessage name="companyname" class="text-red-600" />
+
+              <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="jobposition"
                 placeholder="Jobposition"
                 value
               />
-
-              <input
-                v-model="password"
+              <ErrorMessage name="jobposition" class="text-red-600" />
+              <Field
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
-                name="Password"
+                name="new_password"
                 placeholder="Password"
                 value
               />
+              <ErrorMessage name="new_password" class="text-red-600" />
               <input
-                v-model="password_confirmation"
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="password_confirmation"
@@ -86,10 +91,6 @@
               >
                 Send
               </button>
-
-              <div class="mt-4 text-lg text-center text-red-850">
-                {{ error }}
-              </div>
 
               <div class="flex items-center justify-between my-4">
                 <div class="flex items-center">
@@ -106,18 +107,7 @@
                   <router-link to="/login">login</router-link>
                 </div>
               </div>
-            </form>
-            <div class="mt-4 text-sm text-center text-grey-dark">
-              Настоящим подтверждаю, что ознакомился
-              <a
-                class="no-underline border-b border-grey-dark text-grey-dark"
-                href="#"
-              >
-                с положением о конфиденциальности
-              </a>
-
-              и принимаю его.
-            </div>
+            </Form>
           </div>
         </div>
       </div>
@@ -127,25 +117,30 @@
 
 <script>
 import axios from 'axios';
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import * as Yup from 'yup';
+
 export default {
   inject: ['GStore'],
   data() {
     return {
       // form state
-      formData: {
-        name: '',
-        surname: '',
-        telephone: '',
-        email: '',
-        companyname: '',
-        jobposition: '',
-        password: '',
-        password_confirmation: '',
-        // state
-        errors: null,
-        acceptTerms: null,
-      },
+      name: '',
+      surname: '',
+      telephone: '',
+      email: '',
+      companyname: '',
+      jobposition: '',
+      password: '',
+      password_confirmation: '',
+      // state
+      acceptTerms: null,
     };
+  },
+  components: {
+    Field,
+    Form,
+    ErrorMessage,
   },
   methods: {
     async register() {
@@ -175,6 +170,46 @@ export default {
         console.log(err.message);
       }
     },
+  },
+  setup() {
+    const schema = Yup.object().shape({
+      person_name: Yup.string()
+        .required()
+        .label('Name'),
+      person_surname: Yup.string()
+        .required()
+        .label('Surname'),
+      telephone: Yup.string()
+        .required()
+        .label('Your telephone'),
+      email_addr: Yup.string()
+        .email()
+        .required()
+        .label('Email Address'),
+      companyname: Yup.string()
+        .required()
+        .label('Your companyname'),
+      jobposition: Yup.string()
+        .required()
+        .label('Your jobposition'),
+      new_password: Yup.string()
+        .min(5)
+        .required()
+        .label('Your Password'),
+      password_confirmation: Yup.string()
+        .min(5)
+        .required()
+        .label('Your password confirmation'),
+    });
+
+    function onSubmit(values) {
+      alert(JSON.stringify(values, null, 2));
+    }
+
+    return {
+      schema,
+      onSubmit,
+    };
   },
 };
 </script>

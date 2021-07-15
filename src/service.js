@@ -38,4 +38,7 @@ export default {
   search(product_name) {
     return apiClient.get('products/search/' + product_name);
   },
+  getLocations() {
+    return apiClient.get('/locations');
+  },
 };

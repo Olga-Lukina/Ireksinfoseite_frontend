@@ -4,7 +4,7 @@
       v-for="marketingimage of parsedMarketingImages"
       :key="marketingimage"
       ><img
-        class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
+        class="object-cover w-full mx-auto mb-4 border h-60 s:h-96 rounded-xl"
         :src="`http://localhost/storage/${marketingimage}`"
     /></swiper-slide>
   </swiper>

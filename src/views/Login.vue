@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
-    <div class="container">
+    <div class="container mx-auto">
       <div class="flex flex-col m-4 bg-grey-lighter">
         <div
           class="container flex flex-col items-center justify-center flex-1 max-w-sm px-2 mx-auto"
@@ -10,25 +10,23 @@
           >
             <h3 class="mb-8 text-3xl text-center">Login</h3>
 
-            <form @submit.prevent="login">
-              <input
-                v-model="email"
+            <Form @submit.prevent="login" :validation-schema="schema">
+              <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
-                name="email"
+                name="email_addr"
                 placeholder="E-mail"
                 value
               />
-
-              <input
-                v-model="password"
+              <ErrorMessage name="email_addr" class="text-red-600" />
+              <Field
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
-                name="Password"
+                name="new_password"
                 placeholder="Password"
                 value
               />
-
+              <ErrorMessage name="new_password" class="text-red-600" />
               <button
                 type="submit"
                 name="button"
@@ -36,13 +34,10 @@
               >
                 Login
               </button>
-              <div class="mt-4 text-lg text-center text-red-850">
-                {{ error }}
-              </div>
               <div class="mt-6 text-red-850">
                 <router-link to="/register">Register</router-link>
               </div>
-            </form>
+            </Form>
             <div class="mt-4 text-sm text-center text-grey-dark">
               Настоящим подтверждаю, что ознакомился
               <a
@@ -63,6 +58,8 @@
 
 <script>
 import axios from 'axios';
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import * as Yup from 'yup';
 export default {
   inject: ['GStore'],
   data() {
@@ -95,6 +92,32 @@ export default {
         console.log(err.message);
       }
     },
+  },
+  components: {
+    Field,
+    Form,
+    ErrorMessage,
+  },
+  setup() {
+    const schema = Yup.object().shape({
+      email_addr: Yup.string()
+        .email()
+        .required()
+        .label('Email Address'),
+      new_password: Yup.string()
+        .min(5)
+        .required()
+        .label('Your Password'),
+    });
+
+    function onSubmit(values) {
+      alert(JSON.stringify(values, null, 2));
+    }
+
+    return {
+      schema,
+      onSubmit,
+    };
   },
 };
 </script>
