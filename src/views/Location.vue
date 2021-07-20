@@ -52,10 +52,14 @@
           e-mail: trier-siberia@trier.ru
         </p>
       </div>
+      <!-- <l-map style="height:50vh">
+        <l-geo-json :geojson="geojson" :options="geojsonOptions" />
+      </l-map> -->
     </div>
-    <div class="map">
+
+    <!-- <div class="map">
       <GoogleMap
-        api-key=""
+        api-key="AIzaSyAMNSw7hQYH4thAZ8O_i5XRtJcXQ_Bv0pg"
         style="width: 100%; height: 500px"
         :center="mapCenter"
         :zoom="11"
@@ -64,68 +68,99 @@
           <Marker :clickable="true" :draggable="false" />
         </div>
       </GoogleMap>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { GoogleMap, Marker } from 'vue3-google-map';
-import service from '@/service.js';
+// import 'leaflet/dist/leaflet.css';
+// import { LMap, LGeoJson } from '@vue-leaflet/vue-leaflet';
+// export default {
+//   components: {
+//     LMap,
+//     LGeoJson,
+//   },
+//   data() {
+//     return {
+//       geojson: {
+//         type: 'FeatureCollection',
+//         features: [
+//           // ...
+//         ],
+//       },
+//       geojsonOptions: {
+//         // Options that don't rely on Leaflet methods.
+//       },
+//     };
+//   },
+//   async beforeMount() {
+//     // HERE is where to load Leaflet components!
+//     const { circleMarker } = await import('leaflet/dist/leaflet-src.esm');
 
-export default defineComponent({
-  components: { GoogleMap, Marker },
+//     // And now the Leaflet circleMarker function can be used by the options:
+//     this.geojsonOptions.pointToLayer = (feature, latLng) =>
+//       circleMarker(latLng, { radius: 8 });
+//     this.mapIsReady = true;
+//   },
+// };
 
-  data() {
-    return {
-      locations: [],
-      activeRestaurant: {},
-    };
-  },
-  mounted() {
-    this.getLocations();
-  },
-  methods: {
-    async getLocations() {
-      try {
-        const response = await service.getLocations();
-        this.$data.locations = response.data;
-      } catch (err) {
-        if (err.response) {
-          this.error = err.response.data.message;
-        }
-        console.log(err.message);
-      }
-    },
-    getPosition(r) {
-      return {
-        lat: parseFloat(r.latitude),
-        lng: parseFloat(r.longitude),
-      };
-    },
-  },
+// import { defineComponent } from 'vue';
+// import { GoogleMap, Marker } from 'vue3-google-map';
+// import service from '@/service.js';
 
-  computed: {
-    mapCenter() {
-      if (!this.locations.length) {
-        return {
-          lat: 10,
-          lng: 10,
-        };
-      }
-      return {
-        lat: parseFloat(this.locations[0].latitude),
-        lng: parseFloat(this.locations[0].longitude),
-      };
-    },
-  },
-  infoWindowPosition() {
-    return {
-      lat: parseFloat(this.activeRestaurant.latitude),
-      lng: parseFloat(this.activeRestaurant.longitude),
-    };
-  },
-});
+// export default defineComponent({
+//   components: { GoogleMap, Marker },
+
+//   data() {
+//     return {
+//       locations: [],
+//       activeRestaurant: {},
+//     };
+//   },
+//   mounted() {
+//     this.getLocations();
+//   },
+//   methods: {
+//     async getLocations() {
+//       try {
+//         const response = await service.getLocations();
+//         this.$data.locations = response.data;
+//       } catch (err) {
+//         if (err.response) {
+//           this.error = err.response.data.message;
+//         }
+//         console.log(err.message);
+//       }
+//     },
+//     getPosition(r) {
+//       return {
+//         lat: parseFloat(r.latitude),
+//         lng: parseFloat(r.longitude),
+//       };
+//     },
+//   },
+
+//   computed: {
+//     mapCenter() {
+//       if (!this.locations.length) {
+//         return {
+//           lat: 10,
+//           lng: 10,
+//         };
+//       }
+//       return {
+//         lat: parseFloat(this.locations[0].latitude),
+//         lng: parseFloat(this.locations[0].longitude),
+//       };
+//     },
+//   },
+//   infoWindowPosition() {
+//     return {
+//       lat: parseFloat(this.activeRestaurant.latitude),
+//       lng: parseFloat(this.activeRestaurant.longitude),
+//     };
+//   },
+// });
 </script>
 
 <style></style>

@@ -40,26 +40,30 @@
               >
                 Login
               </button>
-              <div class="mt-6 text-red-850">
-                <router-link to="/register">Register</router-link>
+              <div class="flex items-center justify-between my-4">
+                <div>
+                  <Field
+                    name="acceptTerms"
+                    type="checkbox"
+                    :value="true"
+                    class="w-4 h-4 mr-2"
+                    :class="{ 'is-invalid': errors.acceptTerms }"
+                  />
+                  <label for="acceptTerms" class="w-4 h-4"
+                    >Accept Terms & Conditions</label
+                  >
+                </div>
+                <div class=" text-red-850">
+                  <router-link to="/register"> | Register</router-link>
+                </div>
               </div>
+              <ErrorMessage name="acceptTerms" class="text-red-600" />
             </Form>
             <ul id="errors" class="mt-5 " style="color: red">
               <li v-for="error in errors" :key="error">
                 {{ error }}
               </li>
             </ul>
-            <div class="mt-4 text-sm text-center text-grey-dark">
-              Настоящим подтверждаю, что ознакомился
-              <a
-                class="no-underline border-b border-grey-dark text-grey-dark"
-                href="#"
-              >
-                с положением о конфиденциальности
-              </a>
-
-              и принимаю его.
-            </div>
           </div>
         </div>
       </div>
@@ -115,6 +119,9 @@ export default {
         .min(5)
         .required()
         .label('Your Password'),
+      acceptTerms: Yup.string()
+        .required()
+        .label('Accept terms'),
     });
 
     function onSubmit(values) {

@@ -1,6 +1,12 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
     <div class="container mx-auto">
+      <div
+        class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
+        v-if="GStore.flashMessage"
+      >
+        {{ GStore.flashMessage }}
+      </div>
       <div class="flex flex-col m-4 bg-grey-lighter">
         <div
           class="container flex flex-col items-center justify-center flex-1 max-w-sm px-2 mx-auto"
@@ -89,21 +95,30 @@
               </button>
 
               <div class="flex items-center justify-between my-4">
-                <div class="flex items-center">
-                  <input
-                    class="mr-2"
+                <div>
+                  <Field
+                    name="acceptTerms"
                     type="checkbox"
-                    name="save"
-                    value="save"
+                    :value="true"
+                    class="w-4 h-4 mr-2"
+                    :class="{ 'is-invalid': errors.acceptTerms }"
                   />
-                  <label for="save" class="select-none">save</label>
+                  <label for="acceptTerms" class="w-4 h-4"
+                    >Accept Terms & Conditions</label
+                  >
                 </div>
 
                 <div class=" text-red-850">
-                  <router-link to="/login">login</router-link>
+                  <router-link to="/login">| Login</router-link>
                 </div>
               </div>
+              <ErrorMessage name="acceptTerms" class="text-red-600" />
             </Form>
+            <ul id="errors" class="mt-5 " style="color: red">
+              <li v-for="error in errors" :key="error">
+                {{ error }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -115,22 +130,13 @@
 import axios from 'axios';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as Yup from 'yup';
+import { formatErrorMessages } from '../helpers';
 
 export default {
   inject: ['GStore'],
   data() {
     return {
-      // form state
-      name: '',
-      surname: '',
-      telephone: '',
-      email: '',
-      companyname: '',
-      jobposition: '',
-      password: '',
-      password_confirmation: '',
-      // state
-      acceptTerms: null,
+      errors: [],
     };
   },
   components: {
@@ -139,17 +145,18 @@ export default {
     ErrorMessage,
   },
   methods: {
-    async register() {
+    async register(values) {
+      console.log(values.person_name);
       try {
         const data = await axios.post('http://localhost/api/register', {
-          name: this.name,
-          surname: this.surname,
-          telephone: this.telephone,
-          email: this.email,
-          companyname: this.companyname,
-          jobposition: this.jobposition,
-          password: this.password,
-          password_confirmation: this.password_confirmation,
+          name: values.person_name,
+          surname: values.person_surname,
+          telephone: values.telephone,
+          email: values.email_addr,
+          companyname: values.companyname,
+          jobposition: values.jobposition,
+          password: values.new_password,
+          password_confirmation: values.password_confirmation,
         });
         localStorage.setItem('token', data.data.token);
         this.$store.commit('SET_LOGGED_IN', true);
@@ -159,11 +166,8 @@ export default {
           this.GStore.flashMessage = '';
         }, 3000);
         this.$router.go(-1);
-      } catch (err) {
-        if (err.response) {
-          this.error = err.response.data.message;
-        }
-        console.log(err.message);
+      } catch (e) {
+        this.errors = formatErrorMessages(e);
       }
     },
   },
@@ -196,6 +200,9 @@ export default {
         .min(5)
         .required()
         .label('Your password confirmation'),
+      acceptTerms: Yup.string()
+        .required()
+        .label('Accept terms'),
     });
 
     function onSubmit(values) {
