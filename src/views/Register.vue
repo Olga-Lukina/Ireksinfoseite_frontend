@@ -10,11 +10,7 @@
           >
             <h3 class="mb-8 text-3xl text-center">Register</h3>
 
-            <Form
-              action="post"
-              @submit.prevent="register"
-              :validation-schema="schema"
-            >
+            <Form action="post" @submit="register" :validation-schema="schema">
               <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"

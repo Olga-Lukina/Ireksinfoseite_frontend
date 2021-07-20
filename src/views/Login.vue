@@ -1,6 +1,12 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
     <div class="container mx-auto">
+      <div
+        class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
+        v-if="GStore.flashMessage"
+      >
+        {{ GStore.flashMessage }}
+      </div>
       <div class="flex flex-col m-4 bg-grey-lighter">
         <div
           class="container flex flex-col items-center justify-center flex-1 max-w-sm px-2 mx-auto"
@@ -10,7 +16,7 @@
           >
             <h3 class="mb-8 text-3xl text-center">Login</h3>
 
-            <Form @submit.prevent="login" :validation-schema="schema">
+            <Form @submit="login" :validation-schema="schema">
               <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
@@ -38,6 +44,11 @@
                 <router-link to="/register">Register</router-link>
               </div>
             </Form>
+            <ul id="errors" class="mt-5 " style="color: red">
+              <li v-for="error in errors" :key="error">
+                {{ error }}
+              </li>
+            </ul>
             <div class="mt-4 text-sm text-center text-grey-dark">
               Настоящим подтверждаю, что ознакомился
               <a
@@ -60,21 +71,20 @@
 import axios from 'axios';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as Yup from 'yup';
+import { formatErrorMessages } from '../helpers';
 export default {
   inject: ['GStore'],
   data() {
     return {
-      email: '',
-      password: '',
-      error: null,
+      errors: [],
     };
   },
   methods: {
-    async login() {
+    async login(values) {
       try {
         const data = await axios.post('http://localhost/api/login', {
-          email: this.email,
-          password: this.password,
+          email: values.email_addr,
+          password: values.new_password,
         });
         localStorage.setItem('token', data.data.token);
         this.$store.commit('SET_LOGGED_IN', true);
@@ -85,11 +95,8 @@ export default {
           this.GStore.flashMessage = '';
         }, 3000);
         this.$router.go(-1);
-      } catch (err) {
-        if (err.response) {
-          this.error = err.response.data.message;
-        }
-        console.log(err.message);
+      } catch (e) {
+        this.errors = formatErrorMessages(e);
       }
     },
   },

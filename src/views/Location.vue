@@ -59,30 +59,9 @@
         style="width: 100%; height: 500px"
         :center="mapCenter"
         :zoom="11"
-        @click="handleMapClick"
       >
-        <InfoWindow
-          :options="infoWindowOptions"
-          :position="infoWindowPosition"
-          :opened="infoWindowOpened"
-          @closeclick="handleInfoWindowClose"
-        >
-          <div class="info-window">
-            <h2 v-text="activeLocation.name"></h2>
-            <h4 v-text="'Hours: ' + activeLocation.hours"></h4>
-            <p v-text="activeLocation.city"></p>
-            <p v-text="activeLocation.address"></p>
-            <p v-text="activeLocation.phone"></p>
-            <p v-text="activeLocation.email"></p>
-          </div>
-        </InfoWindow>
         <div v-for="(r, index) in locations" :key="index">
-          <Marker
-            :clickable="true"
-            :draggable="false"
-            :position="getPosition(r)"
-            @click="handleMarkerClicked(r)"
-          />
+          <Marker :clickable="true" :draggable="false" />
         </div>
       </GoogleMap>
     </div>
@@ -100,14 +79,7 @@ export default defineComponent({
   data() {
     return {
       locations: [],
-      infoWindowOptions: {
-        pixelOffset: {
-          width: 0,
-          height: -35,
-        },
-      },
       activeRestaurant: {},
-      infoWindowOpened: false,
     };
   },
   mounted() {
@@ -125,31 +97,14 @@ export default defineComponent({
         console.log(err.message);
       }
     },
-    handleMarkerClicked(r) {
-      this.activeRestaurant = r;
-      this.infoWindowOpened = true;
-    },
-    handleInfoWindowClose() {
-      this.activeRestaurant = {};
-      this.infoWindowOpened = false;
-    },
-    handleMapClick(e) {
-      this.restaurants.push({
-        name: 'Placeholder',
-        hours: '00:00am-00:00pm',
-        city: 'Orlando',
-        state: 'FL',
-        latitude: e.latLng.lat(),
-        longitude: e.latLng.lng(),
-      });
+    getPosition(r) {
+      return {
+        lat: parseFloat(r.latitude),
+        lng: parseFloat(r.longitude),
+      };
     },
   },
-  getPosition(r) {
-    return {
-      lat: parseFloat(r.latitude),
-      lng: parseFloat(r.longitude),
-    };
-  },
+
   computed: {
     mapCenter() {
       if (!this.locations.length) {
