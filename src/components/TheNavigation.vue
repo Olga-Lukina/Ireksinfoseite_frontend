@@ -1,5 +1,11 @@
 <template>
   <div class="container mx-auto">
+    <div
+      class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
+      v-if="GStore.flashMessage"
+    >
+      {{ GStore.flashMessage }}
+    </div>
     <ul
       class="flex items-center justify-center px-4 pt-4 space-x-10 m:space-x-24 "
     >

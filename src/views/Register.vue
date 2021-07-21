@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
-    <div class="container mx-auto">
+    <div class="container mx-auto" style="min-height: 80vh">
       <div
         class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
         v-if="GStore.flashMessage"
@@ -16,7 +16,7 @@
           >
             <h3 class="mb-8 text-3xl text-center">Register</h3>
 
-            <Form action="post" @submit="register" :validation-schema="schema">
+            <Form @submit="register" :validation-schema="schema">
               <Field
                 type="text"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
@@ -70,6 +70,7 @@
                 value
               />
               <ErrorMessage name="jobposition" class="text-red-600" />
+
               <Field
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
@@ -78,13 +79,14 @@
                 value
               />
               <ErrorMessage name="new_password" class="text-red-600" />
-              <input
+              <Field
                 type="password"
                 class="block w-full p-3 mb-4 border rounded border-grey-light"
                 name="password_confirmation"
                 placeholder="Password confirmation"
                 value
               />
+              <ErrorMessage name="new_password" class="text-red-600" />
 
               <button
                 type="submit"
@@ -146,7 +148,6 @@ export default {
   },
   methods: {
     async register(values) {
-      console.log(values.person_name);
       try {
         const data = await axios.post('http://localhost/api/register', {
           name: values.person_name,

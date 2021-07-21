@@ -1,6 +1,7 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
-    <div class="container mx-auto">
+    <div class="container mx-auto" style="min-height: 80vh">
+      <!--flash Message-->
       <div
         class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
         v-if="GStore.flashMessage"

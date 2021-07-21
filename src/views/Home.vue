@@ -1,6 +1,12 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
     <div class="container mx-auto">
+      <div
+        class="p-4 m-4 text-center text-white bg-green-600 flashMessage"
+        v-if="GStore.flashMessage"
+      >
+        {{ GStore.flashMessage }}
+      </div>
       <!--seach-->
       <form
         @submit.prevent="searchProducts"
@@ -14,6 +20,7 @@
           class="w-full p-1 rounded"
           type="text"
           placeholder="Поиск по сайту"
+          @click="$router.push('search')"
         />
       </form>
       <ProductGrid :products="searchResults" />

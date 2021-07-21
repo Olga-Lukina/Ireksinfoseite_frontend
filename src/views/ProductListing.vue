@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-200 border-2 border-gray-200 rounded-t-3xl">
-    <div class="container mx-auto">
+    <div class="container mx-auto" style="min-height: 80vh">
       <!--link back-->
       <div class="bg-gray-200 border-2 border-gray-200 rounded-t-3xl">
         <a class="flex items-center justify-center p-2 m-2" @click="goBack">
