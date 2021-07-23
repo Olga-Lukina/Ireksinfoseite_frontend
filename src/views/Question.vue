@@ -1,6 +1,10 @@
 <template>
-  <div v-if="questions">
-    <TheQuestionList :questions="questions" />
+  <div class="bg-gray-200 border-2 border-gray-200 home rounded-t-3xl">
+    <div class="container mx-auto" style="min-height: 80vh">
+      <div v-if="questions">
+        <TheQuestionList :questions="questions" />
+      </div>
+    </div>
   </div>
 </template>
 

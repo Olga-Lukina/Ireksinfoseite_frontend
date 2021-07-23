@@ -1,5 +1,5 @@
 <template>
-  <swiper :thumbs="{ swiper: thumbsSwiper }">
+  <swiper :thumbs="{ swiper: thumbsSwiper }" :pagination="true">
     <swiper-slide v-for="image of parsedImages" :key="image"
       ><img
         class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
@@ -28,13 +28,13 @@
 
 <script>
 // import Swiper core and required modules
-import SwiperCore, { Thumbs } from 'swiper';
+import SwiperCore, { Thumbs, Pagination } from 'swiper';
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css';
 // install Swiper modules
-SwiperCore.use([Thumbs]);
+SwiperCore.use([Thumbs, Pagination]);
 
 // Import Swiper styles
 export default {
@@ -57,7 +57,7 @@ export default {
           slidesPerView: 1,
           spaceBetween: 40,
         },
-        1024: {
+        1444: {
           slidesPerView: 1,
           spaceBetween: 40,
         },

@@ -8,7 +8,7 @@ import axios from 'axios';
 // using reactiv method for flash massages
 const GStore = reactive({ flashMessage: '' });
 
-const store = createStore({
+export const store = createStore({
   state: {
     user: null,
     loggedIn: false,

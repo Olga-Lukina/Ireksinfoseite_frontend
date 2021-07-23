@@ -1,5 +1,6 @@
 <template>
   <!-- questions -->
+
   <router-link
     :to="'/question/' + productslug"
     class="flex items-center justify-between m-2 bg-white border border-white shadow-md"
@@ -14,6 +15,7 @@
       alt="chevron_left"
     />
   </router-link>
+
   <!-- ask question -->
   <form action="post" class="m-4 review-form" @submit.prevent="onSubmit">
     <h2 class="my-4 font-extrabold text-center uppercase text-red-850">

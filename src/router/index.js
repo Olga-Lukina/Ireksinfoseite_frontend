@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
+import { store } from '../main';
 
 const routes = [
   {
@@ -40,7 +41,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "location"*/ '../views/Question'),
     props: true,
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: '/review/:slug',
@@ -48,7 +49,7 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "location"*/ '../views/Review'),
     props: true,
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
   {
     path: '/categories/:slug',
@@ -77,7 +78,7 @@ const routes = [
     props: true,
     component: () =>
       import(/* webpackChunkName: "subcategories"*/ '../views/RecipeDetail'),
-    // meta: { requiresAuth: true },
+    meta: { requiresAuth: true },
   },
 ];
 
@@ -87,10 +88,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem('user');
-
+  const loggedIn = store.getters.loggedIn;
+  console.log(loggedIn);
   if (to.matched.some((record) => record.meta.requiresAuth) && !loggedIn) {
-    next('/');
+    next('/login');
   }
   next();
 });
