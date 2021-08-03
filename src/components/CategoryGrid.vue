@@ -18,7 +18,9 @@
                 <router-link :to="categorylink(category)">
                   <img
                     class="border rounded-2xl"
-                    :src="`http://localhost/storage/${category.image}`"
+                    :src="
+                      `https://ireks-storage.s3.eu-west-1.amazonaws.com/${category.image}`
+                    "
                     :alt="category.name"
                   />
                 </router-link>
