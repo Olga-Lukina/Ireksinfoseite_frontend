@@ -30,7 +30,11 @@
       <a href="https://www.instagram.com/ireks_trier/" target="_blank"
         ><img src="@/assets/images/instagram.svg" alt="instagram"
       /></a>
-      <img src="@/assets/images/youtub.svg" alt="youtub" />
+      <a
+        href="https://www.youtube.com/channel/UCoU-YIdat69WkYBRUEGeM3w/"
+        target="_blank"
+        ><img src="@/assets/images/youtub.svg" alt="youtub"
+      /></a>
     </div>
     <p class="p-4 text-xs text-center">© Copyright 2021 by OOO IREKS</p>
   </footer>

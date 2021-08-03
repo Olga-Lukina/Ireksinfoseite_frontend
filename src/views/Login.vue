@@ -42,23 +42,12 @@
                 Login
               </button>
               <div class="flex items-center justify-between my-4">
-                <div>
-                  <Field
-                    name="acceptTerms"
-                    type="checkbox"
-                    :value="true"
-                    class="w-4 h-4 mr-2"
-                    :class="{ 'is-invalid': errors.acceptTerms }"
-                  />
-                  <label for="acceptTerms" class="w-4 h-4"
-                    >Accept Terms & Conditions</label
+                <div class="text-center text-red-850">
+                  <router-link to="/register">
+                    No account? | Register one now</router-link
                   >
                 </div>
-                <div class=" text-red-850">
-                  <router-link to="/register"> | Register</router-link>
-                </div>
               </div>
-              <ErrorMessage name="acceptTerms" class="text-red-600" />
             </Form>
             <ul id="errors" class="mt-5 " style="color: red">
               <li v-for="error in errors" :key="error">
@@ -120,11 +109,7 @@ export default {
         .min(5)
         .required()
         .label('Your Password'),
-      acceptTerms: Yup.string()
-        .required()
-        .label('Accept terms'),
     });
-
     function onSubmit(values) {
       alert(JSON.stringify(values, null, 2));
     }
