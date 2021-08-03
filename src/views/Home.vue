@@ -45,7 +45,6 @@ export default {
   },
   mounted() {
     this.getCategories();
-    this.searchProducts();
   },
   updated() {
     console.log(this.GStore);
