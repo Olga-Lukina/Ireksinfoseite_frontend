@@ -5,7 +5,9 @@
       :key="marketingimage"
       ><img
         class="object-cover w-full mx-auto mb-4 border h-60 s:h-96 rounded-xl"
-        :src="`http://localhost/storage/${marketingimage}`"
+        :src="
+          `https://ireks-storage.s3.eu-west-1.amazonaws.com/${marketingimage}`
+        "
     /></swiper-slide>
   </swiper>
 

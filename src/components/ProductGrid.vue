@@ -15,7 +15,9 @@
             <router-link :to="productlink(product)">
               <img
                 class="object-cover w-full h-40 border s:h-44 l:h-64 rounded-2xl"
-                :src="`http://localhost/storage/${product.image}`"
+                :src="
+                  `https://ireks-storage.s3.eu-west-1.amazonaws.com/${product.image}`
+                "
                 :alt="product.name"
               />
             </router-link>

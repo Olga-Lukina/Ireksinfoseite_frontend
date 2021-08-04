@@ -11,7 +11,9 @@
             <router-link :to="recipelink(recipe)">
               <img
                 class="object-cover w-full mb-2 border h-28 s:h-44 l:h-64 rounded-2xl"
-                :src="`http://localhost/storage/${recipe.image}`"
+                :src="
+                  `https://ireks-storage.s3.eu-west-1.amazonaws.com/${recipe.image}`
+                "
                 :alt="recipe.name"
               />
             </router-link>

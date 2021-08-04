@@ -3,7 +3,7 @@
     <swiper-slide v-for="image of parsedImages" :key="image"
       ><img
         class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
-        :src="`http://localhost/storage/${image}`"
+        :src="`https://ireks-storage.s3.eu-west-1.amazonaws.com/${image}`"
     /></swiper-slide>
   </swiper>
 
@@ -21,7 +21,7 @@
       :key="image"
       ><img
         class="object-cover w-full h-32 rounded-xl"
-        :src="`http://localhost/storage/${image}`"
+        :src="`https://ireks-storage.s3.eu-west-1.amazonaws.com/${image}`"
     /></swiper-slide>
   </swiper>
 </template>
