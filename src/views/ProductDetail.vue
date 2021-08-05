@@ -21,7 +21,7 @@
     <!-- stars rating -->
     <div class="flex items-center justify-between m-4">
       <StarRating :rating="product.avgRating" />
-      <p>{{ roundedRating }}/{{ product.reviews.length }}</p>
+      <p>{{ product.reviews.length }} stars</p>
     </div>
     <!--Recepies-->
     <h2 class="m-4 font-extrabold uppercase text-red-850">
