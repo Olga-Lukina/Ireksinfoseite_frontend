@@ -65,30 +65,4 @@ export default {
     },
   },
 };
-
-// created() {
-//   axios
-//     .get('http://localhost/api/categories/{id}')
-//     .then((response) => {
-//       this.categories = response.data;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// },
-
-// computed: {
-// categories() {
-//   const categories = store.categories.filter(
-//     (category) => category.parentslug === this.$route.params.slug
-//   );
-//   console.log(this.$route.params.slug);
-//   return categories;
-// },
-//   parentCategory() {
-//     return store.categories.find(
-//       (category) => category.slug === this.$route.params.slug
-//     );
-//   },
-// },
 </script>

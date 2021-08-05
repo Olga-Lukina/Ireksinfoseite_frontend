@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       products: [],
+      parentCategory: {},
       error: null,
     };
   },
@@ -40,7 +41,9 @@ export default {
         const response = await service.getProductsInCategory(
           this.$route.params.subcategoriesSlug
         );
-        this.products = response.data;
+        console.log(response);
+        this.products = response.data.products;
+        this.parentCategory = response.data.category;
       } catch (err) {
         if (err.response) {
           this.error = err.response.data.message;
@@ -50,15 +53,6 @@ export default {
     },
     goBack() {
       this.$router.go(-1);
-    },
-  },
-  computed: {
-    parentCategory() {
-      const category = store.categories.find(
-        (category) => category.slug === this.$route.params.subcategoriesSlug
-      );
-      console.log(category);
-      return category;
     },
   },
 };

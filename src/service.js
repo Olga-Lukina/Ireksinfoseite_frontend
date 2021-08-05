@@ -8,10 +8,14 @@ const apiClient = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: localStorage.getItem('token')
-      ? 'Bearer ' + localStorage.getItem('token')
-      : null,
   },
+});
+apiClient.interceptors.request.use((config) => {
+  config.headers.Authorization = localStorage.getItem('token')
+    ? 'Bearer ' + localStorage.getItem('token')
+    : null;
+
+  return config;
 });
 
 export default {
