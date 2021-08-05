@@ -76,10 +76,13 @@ export default {
   methods: {
     async login(values) {
       try {
-        const data = await axios.post('http://localhost/api/login', {
-          email: values.email_addr,
-          password: values.new_password,
-        });
+        const data = await axios.post(
+          'https://ireks-api.herokuapp.com/api/login',
+          {
+            email: values.email_addr,
+            password: values.new_password,
+          }
+        );
         localStorage.setItem('token', data.data.token);
         this.$store.commit('SET_LOGGED_IN', true);
         this.$store.commit('SET_USER_DATA', data.data.user);

@@ -39,11 +39,14 @@ export const store = createStore({
     async autoLogin({ commit }) {
       if (localStorage.getItem('token')) {
         try {
-          const data = await axios.get('http://localhost/api/me', {
-            headers: {
-              authorization: 'Bearer ' + localStorage.getItem('token'),
-            },
-          });
+          const data = await axios.get(
+            'https://ireks-api.herokuapp.com/api/me',
+            {
+              headers: {
+                authorization: 'Bearer ' + localStorage.getItem('token'),
+              },
+            }
+          );
           commit('SET_USER_DATA', data.data);
           commit('SET_LOGGED_IN', true);
         } catch (err) {
@@ -54,7 +57,7 @@ export const store = createStore({
     async logout({ commit }) {
       try {
         const data = await axios.post(
-          'http://localhost/api/logout',
+          'https://ireks-api.herokuapp.com/api/logout',
           {},
           {
             headers: {

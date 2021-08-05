@@ -149,16 +149,19 @@ export default {
   methods: {
     async register(values) {
       try {
-        const data = await axios.post('http://localhost/api/register', {
-          name: values.person_name,
-          surname: values.person_surname,
-          telephone: values.telephone,
-          email: values.email_addr,
-          companyname: values.companyname,
-          jobposition: values.jobposition,
-          password: values.new_password,
-          password_confirmation: values.password_confirmation,
-        });
+        const data = await axios.post(
+          'https://ireks-api.herokuapp.com/api/register',
+          {
+            name: values.person_name,
+            surname: values.person_surname,
+            telephone: values.telephone,
+            email: values.email_addr,
+            companyname: values.companyname,
+            jobposition: values.jobposition,
+            password: values.new_password,
+            password_confirmation: values.password_confirmation,
+          }
+        );
         localStorage.setItem('token', data.data.token);
         this.$store.commit('SET_LOGGED_IN', true);
         this.$store.commit('SET_USER_DATA', data.data.user);
