@@ -20,6 +20,7 @@
             class="h-12 mb-4"
             src="@/assets/images/logos.svg"
             alt="ireks-logo"
+            title="ireks-logo"
         /></router-link>
       </li>
       <li v-if="!loggedIn">
