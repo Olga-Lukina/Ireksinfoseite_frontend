@@ -174,7 +174,7 @@ export default {
       }
     },
     generateQrCode() {
-      this.generatedQrCodeUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${window.location.href}!&size=300x300`;
+      this.generatedQrCodeUrl = `http://api.qrserver.com/v1/create-qr-code/?data=${window.location.href}&size=300x300`;
     },
   },
 };

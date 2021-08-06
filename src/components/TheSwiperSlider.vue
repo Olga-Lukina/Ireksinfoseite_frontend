@@ -4,6 +4,8 @@
       ><img
         class="object-cover w-full mx-auto mb-4 border s:h-96 rounded-t-3xl"
         :src="`https://ireks-storage.s3.eu-west-1.amazonaws.com/${image}`"
+        alt="backmischungen für backwaren"
+        title="backmischungen für Brot und Feingeback"
     /></swiper-slide>
   </swiper>
 
